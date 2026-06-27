@@ -113,6 +113,8 @@
 </head>
 <body>
 
+<div id="announce" style="display:none;background:var(--orange);color:#fff;text-align:center;padding:10px 16px;font-size:14.5px;font-weight:600"></div>
+
 <header>
   <div class="wrap nav">
     <div class="brand"><div class="crest">O</div><div><b>Offor Law PLLC</b><span>Attorneys &amp; Counselors at Law</span></div></div>
@@ -123,7 +125,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="navcta">
-      <div class="phone">Call us<br><b>(945) 382‑6353</b></div>
+      <div class="phone">Call us<br><b data-edit="phone">(945) 382‑6353</b></div>
       <a href="#contact" class="btn btn-orange">Free Consultation</a>
     </div>
   </div>
@@ -133,7 +135,7 @@
   <div class="wrap">
     <span class="eyebrow">Bespoke Legal Services</span>
     <h1>Trusted counsel for life's most <em>important moments</em>.</h1>
-    <p>Offor Law PLLC delivers tailored, results‑driven representation in immigration, family law, personal injury, and business services — with the personal attention every client deserves.</p>
+    <p data-edit="hero_sub">Offor Law PLLC delivers tailored, results‑driven representation in immigration, family law, personal injury, and business services — with the personal attention every client deserves.</p>
     <div class="cta">
       <a href="#contact" class="btn btn-orange">Book a free consultation</a>
       <a href="#services" class="btn btn-ghost">Explore practice areas</a>
@@ -157,25 +159,25 @@
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div>
         <h3>Immigration Law</h3>
-        <p>Visas, green cards, naturalization, family petitions, and deportation defense — guiding you through every step toward your American future.</p>
+        <p data-edit="pa_immigration">Visas, green cards, naturalization, family petitions, and deportation defense — guiding you through every step toward your American future.</p>
         <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15 19c0-2 1-3.4 2.4-4"/></svg></div>
         <h3>Family Law</h3>
-        <p>Divorce, custody, support, and adoption handled with compassion and discretion — protecting what matters most to your family.</p>
+        <p data-edit="pa_family">Divorce, custody, support, and adoption handled with compassion and discretion — protecting what matters most to your family.</p>
         <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M12 8v5M9.5 10.5h5"/></svg></div>
         <h3>Personal Injury</h3>
-        <p>Auto accidents, slip‑and‑fall, and negligence claims — we fight for the full compensation you deserve. No recovery, no fee.</p>
+        <p data-edit="pa_injury">Auto accidents, slip‑and‑fall, and negligence claims — we fight for the full compensation you deserve. No recovery, no fee.</p>
         <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div>
         <h3>Business Services</h3>
-        <p>Entity formation, contracts, compliance, and counsel for founders — plus fast, done‑for‑you company registration through our partner.</p>
+        <p data-edit="pa_business">Entity formation, contracts, compliance, and counsel for founders — plus fast, done‑for‑you company registration through our partner.</p>
         <a href="#business" class="more">Register a business →</a>
       </div>
     </div>
@@ -221,8 +223,8 @@
 
 <section class="ctaband" id="contact">
   <div class="wrap">
-    <h2>Let's talk about your case</h2>
-    <p>Schedule a confidential, no‑obligation consultation today.</p>
+    <h2 data-edit="cta_title">Let's talk about your case</h2>
+    <p data-edit="cta_sub">Schedule a confidential, no‑obligation consultation today.</p>
     <a href="mailto:info@offorlaw.com" class="btn btn-navy">Request a free consultation</a>
   </div>
 </section>
@@ -238,10 +240,10 @@
         <a href="#services">Immigration Law</a><a href="#services">Family Law</a><a href="#services">Personal Injury</a><a href="#business">Business Services</a>
       </div>
       <div><h4>Contact</h4>
-        <a href="mailto:info@offorlaw.com">info@offorlaw.com</a>
+        <a href="mailto:info@offorlaw.com" data-edit="email" data-edit-mail>info@offorlaw.com</a>
         <a href="mailto:perryernest@offorlaw.com">perryernest@offorlaw.com</a>
-        <a href="tel:+19453826353">(945) 382‑6353</a>
-        <a href="https://maps.google.com/?q=4099+McEwen+Rd+Suite+115+Dallas+TX+75244" target="_blank" rel="noopener">4099 McEwen Rd, Suite 115<br>Dallas, TX 75244</a>
+        <a href="tel:+19453826353" data-edit="phone" data-edit-tel>(945) 382‑6353</a>
+        <a id="addr" href="https://maps.google.com/?q=4099+McEwen+Rd+Suite+115+Dallas+TX+75244" target="_blank" rel="noopener">4099 McEwen Rd, Suite 115<br>Dallas, TX 75244</a>
       </div>
     </div>
     <div class="bottom">
@@ -251,6 +253,34 @@
     <p class="disc">Attorney advertising. The information on this website is for general informational purposes only and is not legal advice. Viewing this site or contacting the firm does not create an attorney‑client relationship. Prior results do not guarantee a similar outcome.</p>
   </div>
 </footer>
+
+<script>
+/* Render editable content from /content.json over the built-in defaults.
+   Text is applied with textContent (XSS-safe); missing keys keep the default. */
+(function(){
+  fetch('/content.json?_=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; }).then(function(c){
+    if(!c) return;
+    document.querySelectorAll('[data-edit]').forEach(function(el){
+      var k = el.getAttribute('data-edit');
+      if(typeof c[k] === 'string' && c[k].length) el.textContent = c[k];
+    });
+    var digits = (c.phone||'').replace(/[^0-9]/g,'');
+    if(digits){ document.querySelectorAll('[data-edit-tel]').forEach(function(a){ a.href = 'tel:+1' + digits; }); }
+    if(c.email){ document.querySelectorAll('[data-edit-mail]').forEach(function(a){ a.href = 'mailto:' + c.email; }); }
+    var addr = document.getElementById('addr');
+    if(addr && (c.address_line1 || c.address_line2)){
+      var l1 = c.address_line1 || '', l2 = c.address_line2 || '';
+      addr.textContent = l1; if(l2){ addr.appendChild(document.createElement('br')); addr.appendChild(document.createTextNode(l2)); }
+      addr.href = 'https://maps.google.com/?q=' + encodeURIComponent((l1 + ' ' + l2).trim());
+    }
+    var ann = document.getElementById('announce');
+    if(ann){
+      if(c.announcement && c.announcement.trim()){ ann.textContent = c.announcement.trim(); ann.style.display = 'block'; }
+      else { ann.style.display = 'none'; }
+    }
+  }).catch(function(){});
+})();
+</script>
 
 </body>
 </html>

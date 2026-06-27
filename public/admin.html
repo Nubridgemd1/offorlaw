@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Offor Law — Site Editor</title>
+<style>
+  :root{ --navy:#0a2342; --navy2:#0f3160; --orange:#f47a1f; --ink:#1c2433; --ink3:#5b6678; --line:#e7ebf2; --soft:#f5f8fc; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.55}
+  .top{background:var(--navy);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+  .top .brand{display:flex;align-items:center;gap:11px;font-weight:600}
+  .crest{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ff9a45);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:17px}
+  .top small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#ff9a45}
+  .top .who{font-size:13px;color:rgba(255,255,255,.8)}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 20px 70px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:18px;box-shadow:0 6px 22px rgba(10,35,66,.05)}
+  h1{font-size:22px;color:var(--navy);margin-bottom:4px}
+  h2{font-size:15px;color:var(--navy);margin:0 0 14px;text-transform:uppercase;letter-spacing:.06em}
+  p.sub{color:var(--ink3);font-size:14px;margin-bottom:18px}
+  label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 5px}
+  .hint{font-weight:400;color:var(--ink3);font-size:12px}
+  input,textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:11px 13px;font:inherit;color:var(--ink);background:#fff;transition:.15s}
+  input:focus,textarea:focus{outline:none;border-color:var(--orange)}
+  textarea{resize:vertical;min-height:70px}
+  .btn{display:inline-block;border:none;cursor:pointer;font-weight:600;font-size:15px;border-radius:9px;padding:12px 24px;transition:.15s}
+  .btn-orange{background:var(--orange);color:#fff}.btn-orange:hover{background:#e06a12}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}.btn-ghost:hover{border-color:var(--navy)}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .msg{font-size:14px;padding:11px 14px;border-radius:9px;margin-top:14px;display:none}
+  .msg.ok{display:block;background:#e9f7ee;color:#1c7a43;border:1px solid #bfe6cd}
+  .msg.err{display:block;background:#fdecec;color:#b23b3b;border:1px solid #f3c3c3}
+  .msg.warn{display:block;background:#fff6e8;color:#9a5b13;border:1px solid #f3dcb3}
+  .bar{position:sticky;bottom:0;background:rgba(245,248,252,.96);backdrop-filter:blur(4px);border-top:1px solid var(--line);padding:14px 0;margin-top:8px}
+  .field-h{font-size:12px;color:var(--ink3);margin:-2px 0 8px}
+  .group-title{font-family:Georgia,serif;font-size:17px;color:var(--navy);margin:22px 0 2px}
+  .hide{display:none!important}
+  a.back{color:#fff;font-size:13px;text-decoration:none;opacity:.85}a.back:hover{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand"><div class="crest">O</div><div>Offor Law PLLC<small>Site Editor</small></div></div>
+  <div class="row">
+    <span class="who" id="who"></span>
+    <a class="back" href="/" target="_blank" rel="noopener">View site ↗</a>
+    <button class="btn btn-ghost hide" id="logoutBtn" style="padding:7px 14px;font-size:13px;background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">Log out</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LOGIN -->
+  <div class="card" id="loginCard">
+    <h1>Sign in</h1>
+    <p class="sub">Enter your Offor Law admin email and password to edit the website.</p>
+    <form id="loginForm">
+      <label>Email</label>
+      <input type="email" id="email" autocomplete="username" placeholder="you@offorlaw.com" required>
+      <label>Password</label>
+      <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" required>
+      <div style="margin-top:18px"><button class="btn btn-orange" type="submit" id="loginBtn">Sign in</button></div>
+      <div class="msg" id="loginMsg"></div>
+    </form>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="editor" class="hide">
+    <div class="card">
+      <h1>Edit website content</h1>
+      <p class="sub">Update the text below and click <b>Save changes</b>. Your edits publish to offorlaw.com.</p>
+
+      <div class="group-title">Announcement bar</div>
+      <label>Banner message <span class="hint">(leave blank to hide it)</span></label>
+      <input id="f_announcement" placeholder="e.g. Our office will be closed July 4th.">
+
+      <div class="group-title">Homepage intro</div>
+      <label>Hero paragraph</label>
+      <textarea id="f_hero_sub"></textarea>
+
+      <div class="group-title">Practice area descriptions</div>
+      <label>Immigration Law</label>
+      <textarea id="f_pa_immigration"></textarea>
+      <label>Family Law</label>
+      <textarea id="f_pa_family"></textarea>
+      <label>Personal Injury</label>
+      <textarea id="f_pa_injury"></textarea>
+      <label>Business Services</label>
+      <textarea id="f_pa_business"></textarea>
+
+      <div class="group-title">"Let's talk" call-to-action</div>
+      <label>Heading</label>
+      <input id="f_cta_title">
+      <label>Subtext</label>
+      <input id="f_cta_sub">
+
+      <div class="group-title">Contact details</div>
+      <div class="grid2">
+        <div><label>Phone</label><input id="f_phone"></div>
+        <div><label>Public email</label><input id="f_email"></div>
+      </div>
+      <div class="grid2">
+        <div><label>Address line 1</label><input id="f_address_line1"></div>
+        <div><label>Address line 2</label><input id="f_address_line2"></div>
+      </div>
+
+      <div class="msg" id="saveMsg"></div>
+    </div>
+
+    <div class="bar">
+      <div class="wrap" style="padding:0 20px">
+        <div class="row" style="justify-content:space-between">
+          <span class="field-h" id="persistNote"></span>
+          <div class="row">
+            <button class="btn btn-ghost" id="reloadBtn" type="button">Revert</button>
+            <button class="btn btn-orange" id="saveBtn" type="button">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var KEYS = ['announcement','hero_sub','pa_immigration','pa_family','pa_injury','pa_business','cta_title','cta_sub','phone','email','address_line1','address_line2'];
+var loginCard = document.getElementById('loginCard');
+var editor = document.getElementById('editor');
+var who = document.getElementById('who');
+var logoutBtn = document.getElementById('logoutBtn');
+
+function show(el,on){ el.classList.toggle('hide', !on); }
+function msg(el, text, kind){ el.className = 'msg ' + kind; el.textContent = text; }
+
+async function api(path, opts){
+  var r = await fetch(path, Object.assign({ headers:{'Content-Type':'application/json'} }, opts||{}));
+  var data = {}; try{ data = await r.json(); }catch(e){}
+  return { status:r.status, data:data };
+}
+
+function fill(content){ KEYS.forEach(function(k){ var el = document.getElementById('f_'+k); if(el) el.value = content[k] || ''; }); }
+function collect(){ var o = {}; KEYS.forEach(function(k){ var el = document.getElementById('f_'+k); o[k] = el ? el.value : ''; }); return o; }
+
+async function loadEditor(){
+  var res = await api('/admin/api/content');
+  if(res.status !== 200){ enterLoggedOut(); return; }
+  fill(res.data.content || {});
+}
+
+function enterLoggedIn(email, persists){
+  show(loginCard, false); show(editor, true); show(logoutBtn, true);
+  who.textContent = email || '';
+  var pn = document.getElementById('persistNote');
+  pn.textContent = persists ? 'Changes publish to the live site.' : 'Heads up: GitHub persistence is not configured — edits will revert on the next redeploy.';
+  loadEditor();
+}
+function enterLoggedOut(){ show(editor, false); show(logoutBtn, false); who.textContent=''; show(loginCard, true); }
+
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var btn = document.getElementById('loginBtn'); var lm = document.getElementById('loginMsg');
+  btn.disabled = true;
+  var res = await api('/admin/api/login', { method:'POST', body: JSON.stringify({ email: document.getElementById('email').value, password: document.getElementById('password').value }) });
+  btn.disabled = false;
+  if(res.status === 200 && res.data.authed){ lm.style.display='none'; var s = await api('/admin/api/session'); enterLoggedIn(res.data.email, s.data.persists); }
+  else if(res.status === 429){ msg(lm, 'Too many attempts. Please wait a few minutes and try again.', 'err'); }
+  else { msg(lm, 'Invalid email or password.', 'err'); }
+});
+
+logoutBtn.addEventListener('click', async function(){ await api('/admin/api/logout', { method:'POST' }); enterLoggedOut(); });
+document.getElementById('reloadBtn').addEventListener('click', loadEditor);
+
+document.getElementById('saveBtn').addEventListener('click', async function(){
+  var btn = this; var sm = document.getElementById('saveMsg'); btn.disabled = true; btn.textContent = 'Saving…';
+  var res = await api('/admin/api/save', { method:'POST', body: JSON.stringify({ content: collect() }) });
+  btn.disabled = false; btn.textContent = 'Save changes';
+  if(res.status === 401){ msg(sm, 'Your session expired. Please sign in again.', 'err'); setTimeout(enterLoggedOut, 1200); return; }
+  if(res.status !== 200 || !res.data.saved){ msg(sm, 'Could not save. Please try again.', 'err'); return; }
+  msg(sm, res.data.note || 'Saved.', res.data.committed ? 'ok' : 'warn');
+  setTimeout(function(){ sm.style.display='none'; }, 6000);
+});
+
+(async function(){
+  var s = await api('/admin/api/session');
+  if(!s.data.configured){ enterLoggedOut(); msg(document.getElementById('loginMsg'), 'Admin login is not configured on the server yet.', 'warn'); return; }
+  if(s.data.authed){ enterLoggedIn(s.data.email, s.data.persists); } else { enterLoggedOut(); }
+})();
+</script>
+</body>
+</html>
