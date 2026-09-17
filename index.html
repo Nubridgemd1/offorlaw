@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offor Law PLLC — Bespoke Legal Services</title>
+<meta name="description" content="Offor Law PLLC — bespoke legal services in immigration, family law, personal injury, and business services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a2342; --navy2:#0f3160; --navy3:#16407a;
+    --orange:#f47a1f; --orange2:#ff9a45; --orange-soft:#fff3e8;
+    --ink:#1c2433; --ink3:#5b6678; --line:#e7ebf2; --bg:#ffffff; --soft:#f5f8fc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.15;color:var(--navy)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;border-radius:8px;padding:13px 26px;transition:.18s}
+  .btn-orange{background:var(--orange);color:#fff}.btn-orange:hover{background:#e06a12}
+  .btn-ghost{border:1.6px solid rgba(255,255,255,.5);color:#fff}.btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .btn-navy{background:var(--navy);color:#fff}.btn-navy:hover{background:var(--navy2)}
+
+  /* top bar */
+  header{position:sticky;top:0;z-index:30;background:rgba(10,35,66,.97);backdrop-filter:blur(6px);color:#fff}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .crest{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:20px}
+  .brand b{font-family:'Playfair Display',serif;font-size:21px;color:#fff;font-weight:600;letter-spacing:.3px}
+  .brand span{display:block;font-family:'Inter';font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange2);margin-top:1px}
+  nav.links{display:flex;gap:28px;align-items:center}
+  nav.links a{font-size:14.5px;color:rgba(255,255,255,.85);font-weight:500}
+  nav.links a:hover{color:var(--orange2)}
+  .navcta{display:flex;align-items:center;gap:18px}
+  .phone{font-size:14px;color:rgba(255,255,255,.8)}
+  .phone b{color:#fff}
+  @media(max-width:880px){nav.links,.phone{display:none}}
+
+  /* hero */
+  .hero{background:radial-gradient(ellipse 90% 80% at 80% 0%, #16407a 0%, var(--navy) 55%, #071a33 100%);color:#fff;position:relative;overflow:hidden}
+  .hero::after{content:'';position:absolute;right:-120px;top:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(244,122,31,.22),transparent 65%)}
+  .hero .wrap{position:relative;z-index:2;padding:92px 28px 104px;max-width:1180px}
+  .eyebrow{display:inline-block;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange2);font-weight:700;border:1px solid rgba(255,154,69,.4);border-radius:30px;padding:7px 16px;margin-bottom:24px}
+  .hero h1{color:#fff;font-size:clamp(34px,5.2vw,58px);max-width:880px}
+  .hero h1 em{font-style:italic;color:var(--orange2)}
+  .hero p{font-size:19px;color:rgba(255,255,255,.8);max-width:620px;margin:22px 0 34px;font-weight:300}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .trust{display:flex;gap:34px;flex-wrap:wrap;margin-top:54px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+  .trust div{font-size:14px;color:rgba(255,255,255,.72)}
+  .trust b{display:block;font-family:'Playfair Display',serif;font-size:30px;color:#fff;font-weight:600}
+
+  /* sections */
+  .sec{padding:88px 0}
+  .sec.soft{background:var(--soft)}
+  .head{text-align:center;max-width:680px;margin:0 auto 52px}
+  .head .k{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);font-weight:700}
+  .head h2{font-size:clamp(28px,3.6vw,40px);margin:12px 0 12px}
+  .head p{color:var(--ink3);font-size:17px}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 26px;transition:.2s}
+  .card:hover{border-color:var(--orange);box-shadow:0 18px 44px rgba(10,35,66,.10);transform:translateY(-4px)}
+  .ic{width:56px;height:56px;border-radius:13px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .ic svg{width:28px;height:28px;stroke:var(--orange2);fill:none;stroke-width:1.7}
+  .card h3{font-size:21px;margin-bottom:9px}
+  .card p{color:var(--ink3);font-size:14.5px}
+  .card .more{display:inline-block;margin-top:16px;color:var(--orange);font-weight:600;font-size:14px}
+
+  /* business / bizformcorp band */
+  .biz{background:linear-gradient(120deg,var(--navy) 0%, var(--navy2) 60%, #16407a 100%);color:#fff}
+  .biz .wrap{display:grid;grid-template-columns:1.3fr .9fr;gap:50px;align-items:center;padding:74px 28px}
+  @media(max-width:880px){.biz .wrap{grid-template-columns:1fr;gap:34px}}
+  .biz .k{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange2);font-weight:700}
+  .biz h2{color:#fff;font-size:clamp(26px,3.4vw,38px);margin:12px 0 14px}
+  .biz p{color:rgba(255,255,255,.82);font-size:16.5px;max-width:520px;font-weight:300}
+  .biz ul{list-style:none;margin:20px 0 26px}
+  .biz li{display:flex;align-items:center;gap:11px;margin:9px 0;font-size:15px;color:rgba(255,255,255,.9)}
+  .biz li::before{content:'';width:20px;height:20px;border-radius:50%;background:var(--orange);flex:0 0 auto;display:inline-block;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l4 4L19 7'/%3E%3C/svg%3E");background-size:13px;background-repeat:no-repeat;background-position:center}
+  .qrcard{background:#fff;border-radius:18px;padding:26px;text-align:center;color:var(--navy);box-shadow:0 22px 50px rgba(0,0,0,.32)}
+  .qrcard .qr{width:208px;height:208px;margin:6px auto 14px}
+  .qrcard .qr svg{width:100%;height:100%;display:block}
+  .qrcard .label{font-size:13px;color:var(--ink3)}
+  .qrcard .partner{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:4px}
+  .qrcard b{font-family:'Playfair Display',serif;font-size:19px;display:block;margin-bottom:14px}
+  .qrcard .btn{width:100%;margin-top:14px}
+
+  /* why us */
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:820px){.why{grid-template-columns:1fr}}
+  .why .item{padding:6px 4px}
+  .why .n{font-family:'Playfair Display',serif;font-size:34px;color:var(--orange);font-weight:700}
+  .why h3{font-size:19px;margin:8px 0 6px}
+  .why p{color:var(--ink3);font-size:14.5px}
+
+  /* cta band */
+  .ctaband{background:var(--orange);color:#fff;text-align:center;padding:66px 28px}
+  .ctaband h2{color:#fff;font-size:clamp(26px,3.4vw,38px)}
+  .ctaband p{font-size:17px;color:rgba(255,255,255,.92);margin:12px 0 26px}
+
+  footer{background:#071a33;color:rgba(255,255,255,.66);padding:56px 0 28px;font-size:14px}
+  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.1)}
+  @media(max-width:760px){footer .cols{grid-template-columns:1fr}}
+  footer h4{color:#fff;font-size:14px;letter-spacing:.04em;margin-bottom:14px;text-transform:uppercase}
+  footer a{display:block;color:rgba(255,255,255,.66);margin:7px 0}footer a:hover{color:var(--orange2)}
+  footer .bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:rgba(255,255,255,.45)}
+  .disc{font-size:12px;color:rgba(255,255,255,.4);margin-top:10px;max-width:760px}
+</style>
+</head>
+<body>
+
+<div id="announce" style="display:none;background:var(--orange);color:#fff;text-align:center;padding:10px 16px;font-size:14.5px;font-weight:600"></div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><div class="crest">O</div><div><b>Offor Law PLLC</b><span>Attorneys &amp; Counselors at Law</span></div></div>
+    <nav class="links">
+      <a href="#services">Practice Areas</a>
+      <a href="#business">Business Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="navcta">
+      <div class="phone">Call us<br><b data-edit="phone">(945) 382‑6353</b></div>
+      <a href="#contact" class="btn btn-orange">Free Consultation</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Bespoke Legal Services</span>
+    <h1>Trusted counsel for life's most <em>important moments</em>.</h1>
+    <p data-edit="hero_sub">Offor Law PLLC delivers tailored, results‑driven representation in immigration, family law, personal injury, and business services — with the personal attention every client deserves.</p>
+    <div class="cta">
+      <a href="#contact" class="btn btn-orange">Book a free consultation</a>
+      <a href="#services" class="btn btn-ghost">Explore practice areas</a>
+    </div>
+    <div class="trust">
+      <div><b>4</b>Core practice areas</div>
+      <div><b>50</b>States — business filings</div>
+      <div><b>1:1</b>Personal attention</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="head">
+      <div class="k">Practice Areas</div>
+      <h2>Bespoke legal services, tailored to you</h2>
+      <p>Whatever you're facing, we bring clarity, strategy, and dedicated advocacy to your side.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div>
+        <h3>Immigration Law</h3>
+        <p data-edit="pa_immigration">Visas, green cards, naturalization, family petitions, and deportation defense — guiding you through every step toward your American future.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15 19c0-2 1-3.4 2.4-4"/></svg></div>
+        <h3>Family Law</h3>
+        <p data-edit="pa_family">Divorce, custody, support, and adoption handled with compassion and discretion — protecting what matters most to your family.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M12 8v5M9.5 10.5h5"/></svg></div>
+        <h3>Personal Injury</h3>
+        <p data-edit="pa_injury">Auto accidents, slip‑and‑fall, and negligence claims — we fight for the full compensation you deserve. No recovery, no fee.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div>
+        <h3>Business Services</h3>
+        <p data-edit="pa_business">Entity formation, contracts, compliance, and counsel for founders — plus fast, done‑for‑you company registration through our partner.</p>
+        <a href="#business" class="more">Register a business →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="biz" id="business">
+  <div class="wrap">
+    <div>
+      <div class="k">Business Services · Partner</div>
+      <h2>Starting or growing a business? We'll get you registered.</h2>
+      <p>Beyond contracts and counsel, Offor Law helps you stand your company up the right way. Register your LLC, corporation, or non‑profit through our trusted partner <b>BizFormCorp</b> — done for you, in any of the 50 states.</p>
+      <ul>
+        <li>LLC · Corporation · Partnership · Non‑Profit</li>
+        <li>Flat $300 + state fee — ready in 2–3 business days</li>
+        <li>$0 service fee on annual renewals</li>
+        <li>Guided in English, Spanish, French &amp; Portuguese</li>
+      </ul>
+      <a href="https://bizformcorp.com/?ref=ernesto" target="_blank" rel="noopener" class="btn btn-orange">Register your business →</a>
+    </div>
+    <div class="qrcard">
+      <div class="partner">In partnership with</div>
+      <b>BizFormCorp</b>
+      <div class="qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h41v41H0z"/><path stroke="#0a2342" d="M2 2.5h7m1 0h2m1 0h1m1 0h1m2 0h1m4 0h1m1 0h1m1 0h1m1 0h1m2 0h7M2 3.5h1m5 0h1m1 0h1m3 0h3m1 0h3m4 0h1m2 0h3m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m3 0h3m4 0h2m1 0h1m2 0h2m1 0h3m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m1 0h2m3 0h1m3 0h1m1 0h2m2 0h1m2 0h2m2 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m2 0h4m1 0h1m2 0h2m2 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m1 0h1m1 0h7m1 0h1m2 0h3m3 0h2m1 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 9.5h4m1 0h1m1 0h2m1 0h4m1 0h1M5 10.5h1m2 0h1m2 0h3m4 0h1m1 0h3m2 0h2m1 0h2m3 0h3m1 0h2M2 11.5h2m3 0h1m1 0h2m1 0h2m5 0h2m1 0h1m2 0h2m2 0h1m1 0h1m2 0h2m1 0h2M3 12.5h3m1 0h4m1 0h1m1 0h2m1 0h1m1 0h4m1 0h1m1 0h1m3 0h1m1 0h2m1 0h4M2 13.5h2m2 0h2m2 0h5m1 0h2m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m7 0h2M3 14.5h2m3 0h1m6 0h1m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m3 0h3m1 0h1m1 0h1M2 15.5h2m1 0h2m7 0h2m1 0h2m3 0h1m7 0h1m1 0h2m1 0h1m1 0h2M4 16.5h2m1 0h2m3 0h2m2 0h1m2 0h1m2 0h5m3 0h1m2 0h2m1 0h1m1 0h1M2 17.5h3m2 0h1m2 0h3m1 0h1m1 0h8m1 0h1m1 0h1m2 0h1m3 0h1m2 0h2M4 18.5h2m1 0h2m3 0h1m1 0h2m2 0h1m2 0h1m1 0h1m4 0h1m1 0h4m1 0h2M2 19.5h1m3 0h1m3 0h2m6 0h2m3 0h1m1 0h4m1 0h1m1 0h1m1 0h1m3 0h1M2 20.5h1m1 0h1m2 0h2m5 0h1m3 0h4m3 0h2m5 0h1m4 0h2M2 21.5h1m1 0h3m5 0h1m2 0h1m1 0h1m1 0h2m1 0h1m2 0h2m1 0h1m2 0h2m3 0h2M3 22.5h1m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m2 0h3m1 0h2m1 0h1m1 0h4m1 0h3m3 0h1M4 23.5h3m2 0h3m1 0h1m9 0h1m2 0h3m2 0h2m3 0h1m1 0h1M2 24.5h1m1 0h1m3 0h3m3 0h2m1 0h2m1 0h4m2 0h3m3 0h4m1 0h2M3 25.5h1m1 0h2m2 0h3m1 0h2m1 0h2m2 0h2m1 0h1m1 0h3m3 0h1m2 0h2m1 0h1M2 26.5h3m1 0h1m1 0h3m5 0h3m2 0h4m3 0h3m1 0h1m1 0h1m2 0h2M3 27.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h1m2 0h4m2 0h2m6 0h3M2 28.5h1m1 0h2m2 0h3m1 0h3m2 0h2m1 0h1m2 0h3m1 0h1m1 0h6m1 0h1m1 0h1M3 29.5h2m1 0h1m2 0h1m1 0h4m1 0h1m1 0h2m2 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1M2 30.5h3m2 0h8m1 0h1m2 0h6m1 0h1m2 0h6m1 0h1m1 0h1M10 31.5h2m1 0h1m5 0h1m2 0h5m1 0h3m3 0h1m2 0h2M2 32.5h7m2 0h1m1 0h4m1 0h1m3 0h1m3 0h2m1 0h2m1 0h1m1 0h1m1 0h3M2 33.5h1m5 0h1m2 0h1m2 0h1m2 0h1m2 0h5m1 0h1m3 0h1m3 0h1m1 0h1M2 34.5h1m1 0h3m1 0h1m7 0h5m1 0h1m1 0h1m1 0h3m1 0h6m1 0h1M2 35.5h1m1 0h3m1 0h1m1 0h2m3 0h3m3 0h2m2 0h3m3 0h1m2 0h1m1 0h3M2 36.5h1m1 0h3m1 0h1m2 0h3m1 0h1m1 0h4m2 0h1m1 0h2m1 0h2m1 0h1m1 0h4m1 0h1M2 37.5h1m5 0h1m2 0h1m4 0h1m2 0h1m1 0h3m1 0h6M2 38.5h7m2 0h2m2 0h4m2 0h2m2 0h3m1 0h3m1 0h1m1 0h1m1 0h2"/></svg>
+      </div>
+      <div class="label">Scan to register your business</div>
+      <a href="https://bizformcorp.com/?ref=ernesto" target="_blank" rel="noopener" class="btn btn-navy">bizformcorp.com</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec soft" id="why">
+  <div class="wrap">
+    <div class="head"><div class="k">Why Offor Law</div><h2>Big‑firm capability. Boutique attention.</h2></div>
+    <div class="why">
+      <div class="item"><div class="n">01</div><h3>Tailored strategy</h3><p>No cookie‑cutter answers. Every matter gets a plan built around your goals and your circumstances.</p></div>
+      <div class="item"><div class="n">02</div><h3>Clear communication</h3><p>You'll always know where your case stands — in plain language, and in your language.</p></div>
+      <div class="item"><div class="n">03</div><h3>Relentless advocacy</h3><p>From the negotiating table to the courtroom, we pursue the best possible outcome for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ctaband" id="contact">
+  <div class="wrap">
+    <h2 data-edit="cta_title">Let's talk about your case</h2>
+    <p data-edit="cta_sub">Schedule a confidential, no‑obligation consultation today.</p>
+    <a href="mailto:info@offorlaw.com" class="btn btn-navy">Request a free consultation</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="brand"><div class="crest">O</div><div><b style="color:#fff;font-family:'Playfair Display',serif;font-size:19px">Offor Law PLLC</b><span style="color:var(--orange2);font-size:10px;letter-spacing:.2em;text-transform:uppercase">Attorneys &amp; Counselors</span></div></div>
+        <p style="margin-top:14px;max-width:320px">Bespoke legal services in immigration, family law, personal injury, and business — with the personal attention you deserve.</p>
+      </div>
+      <div><h4>Practice Areas</h4>
+        <a href="#services">Immigration Law</a><a href="#services">Family Law</a><a href="#services">Personal Injury</a><a href="#business">Business Services</a>
+      </div>
+      <div><h4>Contact</h4>
+        <a href="mailto:info@offorlaw.com" data-edit="email" data-edit-mail>info@offorlaw.com</a>
+        <a href="mailto:perryernest@offorlaw.com">perryernest@offorlaw.com</a>
+        <a href="tel:+19453826353" data-edit="phone" data-edit-tel>(945) 382‑6353</a>
+        <a id="addr" href="https://maps.google.com/?q=4099+McEwen+Rd+Suite+115+Dallas+TX+75244" target="_blank" rel="noopener">4099 McEwen Rd, Suite 115<br>Dallas, TX 75244</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Offor Law PLLC. All rights reserved.</div>
+      <div>offorlaw.com</div>
+    </div>
+    <p class="disc">Attorney advertising. The information on this website is for general informational purposes only and is not legal advice. Viewing this site or contacting the firm does not create an attorney‑client relationship. Prior results do not guarantee a similar outcome.</p>
+  </div>
+</footer>
+
+<script>
+/* Render editable content from /content.json over the built-in defaults.
+   Text is applied with textContent (XSS-safe); missing keys keep the default. */
+(function(){
+  fetch('content.json?_=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; }).then(function(c){
+    if(!c) return;
+    document.querySelectorAll('[data-edit]').forEach(function(el){
+      var k = el.getAttribute('data-edit');
+      if(typeof c[k] === 'string' && c[k].length) el.textContent = c[k];
+    });
+    var digits = (c.phone||'').replace(/[^0-9]/g,'');
+    if(digits){ document.querySelectorAll('[data-edit-tel]').forEach(function(a){ a.href = 'tel:+1' + digits; }); }
+    if(c.email){ document.querySelectorAll('[data-edit-mail]').forEach(function(a){ a.href = 'mailto:' + c.email; }); }
+    var addr = document.getElementById('addr');
+    if(addr && (c.address_line1 || c.address_line2)){
+      var l1 = c.address_line1 || '', l2 = c.address_line2 || '';
+      addr.textContent = l1; if(l2){ addr.appendChild(document.createElement('br')); addr.appendChild(document.createTextNode(l2)); }
+      addr.href = 'https://maps.google.com/?q=' + encodeURIComponent((l1 + ' ' + l2).trim());
+    }
+    var ann = document.getElementById('announce');
+    if(ann){
+      if(c.announcement && c.announcement.trim()){ ann.textContent = c.announcement.trim(); ann.style.display = 'block'; }
+      else { ann.style.display = 'none'; }
+    }
+  }).catch(function(){});
+})();
+</script>
+
+</body>
+</html>
