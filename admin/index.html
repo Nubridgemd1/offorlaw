@@ -8,114 +8,88 @@
 <style>
   :root{--navy:#0a2342;--navy2:#0f3160;--orange:#f47a1f;--orange2:#ff9a45;--orange-soft:#fff3e8;--ink:#1c2433;--ink3:#5b6678;--line:#e7ebf2;--bg:#fff;--soft:#f5f8fc;--green:#1f8a52;--red:#c0392b}
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Inter',Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.55;font-size:15px}
+  body{margin:0;font-family:'Inter',Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.5;font-size:15px}
   h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--navy);margin:0}
-  /* gate */
   #gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:linear-gradient(150deg,var(--navy),var(--navy2))}
   .gate-card{background:#fff;border-radius:18px;padding:36px 34px;width:min(380px,92vw);text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
   .crest{width:52px;height:52px;border-radius:12px;margin:0 auto 14px;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:26px}
   .gate-card h2{font-size:23px;margin-bottom:3px}
   .gate-card p{color:var(--ink3);font-size:13px;margin:0 0 18px}
-  input,textarea,select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-family:'Inter';font-size:15px;background:#fff;color:var(--ink)}
-  textarea{min-height:84px;resize:vertical;line-height:1.5}
+  input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-family:'Inter';font-size:14.5px;background:#fff;color:var(--ink)}
+  textarea{min-height:70px;resize:vertical;line-height:1.5}
   .gate-card input{text-align:center;letter-spacing:.08em}
   button{cursor:pointer;font-family:'Inter';font-weight:600}
-  .btn{border:0;border-radius:999px;padding:12px 22px;font-size:14.5px}
+  .btn{border:0;border-radius:999px;padding:11px 20px;font-size:14px}
   .btn-o{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;box-shadow:0 8px 20px rgba(244,122,31,.3)}
   .btn-navy{background:var(--navy);color:#fff}
   .btn-ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
   .gate-card .btn{width:100%;margin-top:14px}
   .err{color:var(--red);font-size:13px;min-height:16px;margin-top:10px}
-  /* shell */
-  .top{background:var(--navy);color:#fff;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
+  .top{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
   .top .brand{display:flex;align-items:center;gap:11px}
-  .top .brand .crest{width:38px;height:38px;margin:0;border-radius:9px;font-size:19px}
-  .top .brand b{font-family:'Playfair Display',serif;font-size:19px}
+  .top .brand .crest{width:36px;height:36px;margin:0;border-radius:9px;font-size:18px}
+  .top .brand b{font-family:'Playfair Display',serif;font-size:18px}
   .top .brand span{display:block;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange2)}
-  .top a.view{color:#fff;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.35);padding:8px 15px;border-radius:999px}
-  .wrap{max-width:760px;margin:0 auto;padding:24px 18px 90px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px;margin-bottom:18px;box-shadow:0 8px 26px rgba(10,35,66,.05)}
-  .card h3{font-size:19px;margin-bottom:3px}
-  .card .sub{color:var(--ink3);font-size:13px;margin-bottom:14px}
-  label{display:block;font-size:12.5px;color:var(--navy);font-weight:600;margin:14px 0 6px}
-  label .hint{font-weight:400;color:var(--ink3);text-transform:none;letter-spacing:0}
+  .top a.view{color:#fff;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.35);padding:7px 14px;border-radius:999px}
+  .wrap{max-width:780px;margin:0 auto;padding:22px 16px 110px}
+  .sec{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:14px;box-shadow:0 8px 26px rgba(10,35,66,.05);overflow:hidden}
+  .sec>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;font-family:'Playfair Display',serif;font-size:18px;color:var(--navy)}
+  .sec>summary::-webkit-details-marker{display:none}
+  .sec>summary .chev{color:var(--orange);font-size:13px;font-family:'Inter';font-weight:600}
+  .sec[open]>summary{border-bottom:1px solid var(--line)}
+  .body{padding:8px 20px 20px}
+  label{display:block;font-size:12px;color:var(--navy);font-weight:600;margin:14px 0 5px}
+  label .hint{font-weight:400;color:var(--ink3)}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;box-shadow:0 -8px 24px rgba(10,35,66,.06);z-index:30}
-  .bar .msg{font-size:13px;font-weight:500}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:11px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;box-shadow:0 -8px 24px rgba(10,35,66,.06);z-index:30}
+  .bar .msg{font-size:13px;font-weight:500;flex-basis:100%;text-align:center;margin-top:2px}
   .ok{color:var(--green)}.bad{color:var(--red)}
-  .note{font-size:12px;color:var(--ink3);margin-top:10px}
-  .pub{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);margin-bottom:10px}
-  .dot{width:9px;height:9px;border-radius:50%;background:#c9d2e0;flex:none}
-  .dot.on{background:var(--green)}
-  details summary{cursor:pointer;font-size:13px;color:var(--navy);font-weight:600}
+  .note{font-size:12px;color:var(--ink3);margin-top:8px}
+  .pub{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);margin:6px 0 2px}
+  .dot{width:9px;height:9px;border-radius:50%;background:#c9d2e0;flex:none}.dot.on{background:var(--green)}
   code{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+  details.inner summary{cursor:pointer;font-size:13px;color:var(--navy);font-weight:600;margin-top:6px}
   @media(max-width:560px){.two{grid-template-columns:1fr}}
 </style></head><body>
 
-<!-- GATE -->
 <div id="gate">
   <div class="gate-card">
-    <div class="crest">O</div>
-    <h2>Site Editor</h2>
-    <p>Offor Law PLLC</p>
+    <div class="crest">O</div><h2>Site Editor</h2><p>Offor Law PLLC</p>
     <input id="pass" type="password" placeholder="Enter passcode" onkeydown="if(event.key==='Enter')unlock()">
     <button class="btn btn-o" onclick="unlock()">Unlock</button>
     <div class="err" id="gateErr"></div>
   </div>
 </div>
 
-<!-- SHELL -->
 <div class="top">
   <div class="brand"><div class="crest">O</div><div><b>Offor Law PLLC</b><span>Site Editor</span></div></div>
   <a class="view" href="/" target="_blank">View site ↗</a>
 </div>
 
 <div class="wrap">
-  <div class="card">
-    <h3>Website Content</h3>
-    <p class="sub">Edit the text below and press <b>Save &amp; Publish</b>. Changes go live on offorlaw.com within about a minute.</p>
+  <p class="note" style="margin:2px 0 14px">Edit any section below, then press <b>Save &amp; Publish</b>. Changes go live on offorlaw.com in about a minute. Empty a field to restore its built‑in default.</p>
+  <div id="form"></div>
 
-    <label>Announcement bar <span class="hint">(leave blank to hide it)</span></label>
-    <input id="f-announcement" placeholder="e.g. Now offering free 15-minute consultations">
+  <details class="sec" id="sec-settings">
+    <summary>Settings <span class="chev">Passcode &amp; publishing ▾</span></summary>
+    <div class="body">
+      <h3 style="font-size:16px;margin-bottom:2px">Change passcode</h3>
+      <p class="note">Sets the passcode for this editor. With a publish token saved, the new passcode applies on <b>every device</b>; without one, it changes only on this device.</p>
+      <div class="two">
+        <div><label>New passcode</label><input id="np1" type="text" autocomplete="off"></div>
+        <div><label>Confirm passcode</label><input id="np2" type="text" autocomplete="off"></div>
+      </div>
+      <div style="margin-top:12px"><button class="btn btn-navy" onclick="changePass()">Update passcode</button><span id="passMsg" class="note" style="margin-left:12px"></span></div>
 
-    <label>Hero intro</label>
-    <textarea id="f-hero_sub"></textarea>
-
-    <label>Practice area — Immigration</label>
-    <textarea id="f-pa_immigration"></textarea>
-    <label>Practice area — Family Law</label>
-    <textarea id="f-pa_family"></textarea>
-    <label>Practice area — Personal Injury</label>
-    <textarea id="f-pa_injury"></textarea>
-    <label>Practice area — Business Services</label>
-    <textarea id="f-pa_business"></textarea>
-
-    <div class="two">
-      <div><label>Call-to-action title</label><input id="f-cta_title"></div>
-      <div><label>Call-to-action subtitle</label><input id="f-cta_sub"></div>
-    </div>
-    <div class="two">
-      <div><label>Phone</label><input id="f-phone"></div>
-      <div><label>Email</label><input id="f-email"></div>
-    </div>
-    <div class="two">
-      <div><label>Address line 1</label><input id="f-address_line1"></div>
-      <div><label>Address line 2</label><input id="f-address_line2"></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Publishing</h3>
-    <p class="sub">This site has no server, so publishing commits <code>content.json</code> to GitHub with a personal access token. The token is stored <b>only in this browser</b> and never leaves your device except to call GitHub directly.</p>
-    <div class="pub"><span class="dot" id="tokDot"></span><span id="tokState">No publish token saved — you can still Download the file and commit it manually.</span></div>
-    <details>
-      <summary>Set / change publish token</summary>
+      <h3 style="font-size:16px;margin:22px 0 2px">Publishing token</h3>
+      <p class="note">This site has no server, so publishing commits <code>content.json</code> to GitHub. The token is stored <b>only in this browser</b>.</p>
+      <div class="pub"><span class="dot" id="tokDot"></span><span id="tokState"></span></div>
       <label>GitHub fine‑grained token <span class="hint">(repo <code>Nubridgemd1/offorlaw</code> · Contents: Read &amp; write)</span></label>
       <input id="f-token" type="password" placeholder="github_pat_…">
-      <div style="margin-top:12px;display:flex;gap:10px"><button class="btn btn-navy" onclick="saveToken()">Save token</button><button class="btn btn-ghost" onclick="clearToken()">Remove</button></div>
-      <p class="note">Create at GitHub → Settings → Developer settings → Fine‑grained tokens. Repository access: only <code>Nubridgemd1/offorlaw</code>; Permissions → Contents → Read and write.</p>
-    </details>
-  </div>
+      <div style="margin-top:10px;display:flex;gap:10px"><button class="btn btn-navy" onclick="saveToken()">Save token</button><button class="btn btn-ghost" onclick="clearToken()">Remove</button></div>
+      <p class="note">GitHub → Settings → Developer settings → Fine‑grained tokens. Repository access: only <code>Nubridgemd1/offorlaw</code>; Permissions → Contents → Read and write.</p>
+    </div>
+  </details>
 </div>
 
 <div class="bar">
@@ -126,57 +100,130 @@
 </div>
 
 <script>
-/* ---- config ---- */
 var REPO="Nubridgemd1/offorlaw", BRANCH="gh-pages", PATH="content.json";
 var DEFPASS="offorlaw2026";
-var KEYS=["announcement","hero_sub","pa_immigration","pa_family","pa_injury","pa_business","cta_title","cta_sub","phone","email","address_line1","address_line2"];
 
-/* ---- auth ---- */
-function getPass(){return localStorage.getItem("offor_pass")||DEFPASS;}
+/* ---- form schema: every editable tile, grouped by section ---- */
+var SCHEMA=[
+  {t:"Brand & Navigation", open:true, f:[
+    ["brand_name","Firm name"],["brand_tagline","Tagline"],["brand_initial","Logo initial"],
+    ["nav_cta","Header button"],["announcement","Announcement bar (blank = hidden)"]]},
+  {t:"Hero", f:[
+    ["hero_eyebrow","Eyebrow"],["hero_title","Headline"],["hero_title_em","Headline — emphasized words"],
+    ["hero_sub","Intro paragraph","area"],["hero_btn1","Primary button"],["hero_btn2","Secondary button"],
+    ["stat1_n","Stat 1 — number"],["stat1_l","Stat 1 — label"],
+    ["stat2_n","Stat 2 — number"],["stat2_l","Stat 2 — label"],
+    ["stat3_n","Stat 3 — number"],["stat3_l","Stat 3 — label"]]},
+  {t:"Practice Areas", f:[
+    ["services_kicker","Section kicker"],["services_title","Section title"],["services_sub","Section intro","area"],
+    ["pa_immigration_t","Card 1 — title"],["pa_immigration","Card 1 — text","area"],
+    ["pa_family_t","Card 2 — title"],["pa_family","Card 2 — text","area"],
+    ["pa_injury_t","Card 3 — title"],["pa_injury","Card 3 — text","area"],
+    ["pa_business_t","Card 4 — title"],["pa_business","Card 4 — text","area"]]},
+  {t:"Business / Partner", f:[
+    ["biz_kicker","Kicker"],["biz_title","Title"],["biz_sub","Paragraph","area"],
+    ["biz_li1","Bullet 1"],["biz_li2","Bullet 2"],["biz_li3","Bullet 3"],["biz_li4","Bullet 4"],
+    ["biz_btn","Button"],["biz_partner_label","Card — small label"],["biz_partner_name","Card — partner name"],
+    ["biz_qr_label","Card — QR caption"],["biz_qr_btn","Card — link button"]]},
+  {t:"Why Us", f:[
+    ["why_kicker","Kicker"],["why_title","Title"],
+    ["why1_n","Item 1 — number"],["why1_t","Item 1 — title"],["why1_d","Item 1 — text","area"],
+    ["why2_n","Item 2 — number"],["why2_t","Item 2 — title"],["why2_d","Item 2 — text","area"],
+    ["why3_n","Item 3 — number"],["why3_t","Item 3 — title"],["why3_d","Item 3 — text","area"]]},
+  {t:"Call to Action", f:[
+    ["cta_title","Title"],["cta_sub","Subtitle"],["cta_btn","Button"]]},
+  {t:"Contact & Footer", f:[
+    ["phone","Phone"],["email","Primary email"],["email2","Secondary email"],
+    ["address_line1","Address line 1"],["address_line2","Address line 2"],
+    ["footer_blurb","Footer blurb","area"],["footer_copyright","Copyright line"],
+    ["footer_disclaimer","Legal disclaimer","area"]]}
+];
+var KEYS=[];SCHEMA.forEach(function(s){s.f.forEach(function(f){KEYS.push(f[0]);});});
+
+/* ---- render the form ---- */
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+document.getElementById("form").innerHTML=SCHEMA.map(function(s){
+  var rows=s.f.map(function(f){var id="f-"+f[0];
+    var ctl=f[2]==="area"?('<textarea id="'+id+'"></textarea>'):('<input id="'+id+'">');
+    return '<label>'+esc(f[1])+'</label>'+ctl;}).join("");
+  return '<details class="sec"'+(s.open?' open':'')+'><summary>'+esc(s.t)+'<span class="chev">▾</span></summary><div class="body">'+rows+'</div></details>';
+}).join("");
+
+/* ---- auth (supports a published hash so a changed passcode works on any device) ---- */
+var CUR={}, CURP;
+function loadContent(){CURP=fetch("/"+PATH+"?_="+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(c){
+  CUR=c||{};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(typeof CUR[k]==="string")?CUR[k]:"";});return CUR;
+}).catch(function(){CUR={};return CUR;});return CURP;}
+loadContent();
+
+function sha256(str){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)).then(function(buf){
+  return Array.prototype.map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,"0");}).join("");});}
 function unlock(){var v=document.getElementById("pass").value;
-  if(v===getPass()){document.getElementById("gate").style.display="none";sessionStorage.setItem("offor_auth","1");}
-  else{document.getElementById("gateErr").textContent="Incorrect passcode.";}}
+  (CURP||Promise.resolve({})).then(function(){
+    var h=CUR&&CUR._adminHash;
+    if(h){ sha256(v).then(function(hh){ if(hh===h) open(); else fail(); }); }
+    else { if(v===(localStorage.getItem("offor_pass")||DEFPASS)) open(); else fail(); }
+  });}
+function open(){document.getElementById("gate").style.display="none";sessionStorage.setItem("offor_auth","1");}
+function fail(){document.getElementById("gateErr").textContent="Incorrect passcode.";}
 if(sessionStorage.getItem("offor_auth")==="1")document.getElementById("gate").style.display="none";
 
 /* ---- token ---- */
 function tok(){return localStorage.getItem("offor_gh_token")||"";}
 function renderTok(){var t=tok();document.getElementById("tokDot").className="dot"+(t?" on":"");
-  document.getElementById("tokState").textContent=t?"Publish token saved on this device — Save & Publish will go live automatically.":"No publish token saved — you can still Download the file and commit it manually.";}
-function saveToken(){var v=document.getElementById("f-token").value.trim();if(!v){return;}localStorage.setItem("offor_gh_token",v);document.getElementById("f-token").value="";renderTok();setMsg("Token saved.","ok");}
+  document.getElementById("tokState").textContent=t?"Token saved — Save & Publish goes live automatically.":"No token — use Download, or add a token to publish in one click.";}
+function saveToken(){var v=document.getElementById("f-token").value.trim();if(!v)return;localStorage.setItem("offor_gh_token",v);document.getElementById("f-token").value="";renderTok();setMsg("Token saved.","ok");}
 function clearToken(){localStorage.removeItem("offor_gh_token");renderTok();setMsg("Token removed.","ok");}
+renderTok();
 
-/* ---- load current content ---- */
-function load(){fetch("/"+PATH+"?_="+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(c){
-  KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(c&&typeof c[k]==="string")?c[k]:"";});
-}).catch(function(){});}
-load();renderTok();
-
-/* ---- gather ---- */
-function gather(){var o={};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);o[k]=el?el.value:"";});return o;}
-function json(){return JSON.stringify(gather(),null,2)+"\n";}
+/* ---- gather / publish ---- */
+function gather(){var o={};for(var k in CUR){o[k]=CUR[k];}            // preserve extras like _adminHash
+  KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)o[k]=el.value;});return o;}
+function jsonOf(o){return JSON.stringify(o,null,2)+"\n";}
 function setMsg(t,cls){var m=document.getElementById("msg");m.textContent=t;m.className="msg "+(cls||"");}
-
-/* ---- download / copy fallbacks ---- */
-function downloadJSON(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([json()],{type:"application/json"}));a.download="content.json";a.click();setMsg("Downloaded — commit it to the gh-pages branch to publish.","ok");}
-function copyJSON(){navigator.clipboard.writeText(json()).then(function(){setMsg("JSON copied.","ok");});}
-
-/* ---- publish via GitHub API ---- */
 function b64(str){return btoa(unescape(encodeURIComponent(str)));}
-function publish(){
+
+function commit(obj,okMsg){
   var t=tok();
-  if(!t){setMsg("No token saved — use Download instead, or add a token under Publishing.","bad");return;}
-  var btn=document.getElementById("pubBtn");btn.disabled=true;setMsg("Publishing…","");
+  if(!t){setMsg("No token saved — open Settings to add one, or use Download.","bad");return Promise.resolve(false);}
   var api="https://api.github.com/repos/"+REPO+"/contents/"+PATH;
   var H={"Authorization":"Bearer "+t,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
-  fetch(api+"?ref="+BRANCH,{headers:H}).then(function(r){return r.ok?r.json():{};}).then(function(cur){
-    var body={message:"Update site content via editor",content:b64(json()),branch:BRANCH};
+  setMsg("Publishing…","");
+  return fetch(api+"?ref="+BRANCH,{headers:H}).then(function(r){return r.ok?r.json():{};}).then(function(cur){
+    var body={message:"Update site content via editor",content:b64(jsonOf(obj)),branch:BRANCH};
     if(cur&&cur.sha)body.sha=cur.sha;
     return fetch(api,{method:"PUT",headers:H,body:JSON.stringify(body)});
   }).then(function(r){
-    if(r.ok){setMsg("✓ Saved and published. Live on offorlaw.com in ~1 minute.","ok");}
-    else{r.json().then(function(e){setMsg("Publish failed: "+((e&&e.message)||r.status)+". Check the token's Contents:write permission.","bad");});}
-  }).catch(function(e){setMsg("Publish failed: "+e.message+". You can Download and commit manually.","bad");})
-  .then(function(){btn.disabled=false;});
+    if(r.ok){CUR=obj;setMsg(okMsg||"✓ Saved and published. Live in ~1 minute.","ok");return true;}
+    return r.json().then(function(e){setMsg("Publish failed: "+((e&&e.message)||r.status)+". Check the token's Contents:write permission.","bad");return false;});
+  }).catch(function(e){setMsg("Publish failed: "+e.message+". You can Download and commit manually.","bad");return false;});
+}
+function publish(){var btn=document.getElementById("pubBtn");btn.disabled=true;
+  commit(gather(),null).then(function(){btn.disabled=false;});}
+function downloadJSON(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([jsonOf(gather())],{type:"application/json"}));a.download="content.json";a.click();setMsg("Downloaded — commit it to the gh-pages branch to publish.","ok");}
+function copyJSON(){navigator.clipboard.writeText(jsonOf(gather())).then(function(){setMsg("JSON copied.","ok");});}
+
+/* ---- change passcode ---- */
+function changePass(){
+  var a=document.getElementById("np1").value, b=document.getElementById("np2").value;
+  var pm=document.getElementById("passMsg");
+  if(a.length<4){pm.textContent="Use at least 4 characters.";pm.className="note bad";return;}
+  if(a!==b){pm.textContent="The two entries don't match.";pm.className="note bad";return;}
+  sha256(a).then(function(h){
+    if(tok()){
+      var obj=gather();obj._adminHash=h;
+      pm.textContent="Publishing new passcode…";pm.className="note";
+      commit(obj,"✓ Passcode updated & published — applies on all devices.").then(function(ok){
+        if(ok){localStorage.removeItem("offor_pass");document.getElementById("np1").value="";document.getElementById("np2").value="";
+          pm.textContent="Updated on all devices.";pm.className="note ok";}
+        else{pm.textContent="Couldn't publish — check your token. Passcode unchanged on other devices.";pm.className="note bad";}
+      });
+    } else {
+      localStorage.setItem("offor_pass",a);
+      pm.textContent="Updated on THIS device only (no token). Add a token to sync everywhere.";pm.className="note ok";
+      document.getElementById("np1").value="";document.getElementById("np2").value="";
+    }
+  });
 }
 </script>
 </body></html>
