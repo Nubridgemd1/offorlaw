@@ -138,6 +138,8 @@ var SCHEMA=[
     ["why1_n","Item 1 — number"],["why1_t","Item 1 — title"],["why1_d","Item 1 — text","area"],
     ["why2_n","Item 2 — number"],["why2_t","Item 2 — title"],["why2_d","Item 2 — text","area"],
     ["why3_n","Item 3 — number"],["why3_t","Item 3 — title"],["why3_d","Item 3 — text","area"]]},
+  {t:"Attorney (hero)", f:[
+    ["attorney_name","Name shown under the photo (blank = none)"],["attorney_title","Title / firm line under the photo"]]},
   {t:"Photo Reel (headings)", f:[
     ["gallery_kicker","Section kicker"],["gallery_title","Section title"],["gallery_sub","Section intro","area"]]},
   {t:"Call to Action", f:[
@@ -160,14 +162,30 @@ document.getElementById("form").innerHTML=SCHEMA.map(function(s){
 }).join("");
 
 /* ---- auth (supports a published hash so a changed passcode works on any device) ---- */
-var CUR={}, CURP, REEL=[];
+var CUR={}, CURP, REEL=[], HEROP="";
+var HERO_DEFAULT="/assets/attorney.jpg";
 function loadContent(){CURP=fetch("/"+PATH+"?_="+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(c){
   CUR=c||{};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(typeof CUR[k]==="string")?CUR[k]:"";});
+  HEROP=(typeof CUR.hero_photo==="string")?CUR.hero_photo:"";
   REEL=Array.isArray(CUR.reel)?CUR.reel.map(function(x){return {img:(x&&x.img)||"",cap:(x&&x.cap)||""};}).filter(function(x){return x.img;}):[];
   renderReel();
   return CUR;
 }).catch(function(){CUR={};renderReel();return CUR;});return CURP;}
 loadContent();
+
+/* ---- main (attorney/hero) photo: replaceable in real time; stored in content.json so it updates everywhere ---- */
+function renderHeroPhoto(){
+  var cur=HEROP||HERO_DEFAULT;
+  return '<details class="sec" open><summary>Main photo (attorney) <span class="chev">Replace from any device ▾</span></summary><div class="body">'
+    +'<p class="note">The large portrait in the homepage banner. Replace it with a new photo from this device; it goes live for <b>everyone, on every device</b> when you press <b>Save &amp; Publish</b>.</p>'
+    +'<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">'
+    +'<img src="'+esc(cur)+'" alt="" style="width:92px;height:116px;object-fit:cover;border-radius:10px;border:1px solid var(--line);flex:none;background:var(--soft)">'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn btn-o filebtn">Replace photo<input type="file" accept="image/*" style="display:none" onchange="setHeroPhoto(this)"></label>'
+    +(HEROP?'<button type="button" class="btn btn-ghost" onclick="clearHeroPhoto()">Use default</button>':'')+'</div>'
+    +'</div></div></details>';
+}
+function setHeroPhoto(input){var f=input.files&&input.files[0];if(!f||!/^image\//.test(f.type)){return;}setMsg("Processing photo…","");compressImg(f,function(d){HEROP=d;renderReel();setMsg("Photo set. Press Save & Publish to go live on all devices.","ok");});input.value="";}
+function clearHeroPhoto(){HEROP="";renderReel();}
 
 /* ---- photo reel manager (uploads publish inside content.json, so they go live on any device) ---- */
 function renderReel(){
@@ -181,7 +199,7 @@ function renderReel(){
       +'<button type="button" class="btn btn-ghost mini danger" onclick="reelDel('+i+')">Remove</button>'
       +'</div></div></div>';
   }).join("");
-  el.innerHTML='<details class="sec" id="sec-reel" open><summary>Photo Reel — pictures <span class="chev">Upload from any device ▾</span></summary><div class="body">'
+  el.innerHTML=renderHeroPhoto()+'<details class="sec" id="sec-reel" open><summary>Photo Reel — pictures <span class="chev">Upload from any device ▾</span></summary><div class="body">'
     +'<p class="note">Add photos of the firm — they show in a scrolling reel on the homepage. Upload straight from this device (your phone’s camera or gallery works too). Pictures go live for <b>everyone, on every device</b> when you press <b>Save &amp; Publish</b>.</p>'
     +'<div class="reelAdd"><label class="btn btn-o filebtn">＋ Add pictures<input type="file" accept="image/*" multiple style="display:none" onchange="addReelFiles(this)"></label>'
     +'<div class="urlrow"><input id="reelUrl" placeholder="…or paste an image URL"><button type="button" class="btn btn-ghost" onclick="addReelUrl()">Add</button></div></div>'
@@ -235,6 +253,7 @@ if(sessionStorage.getItem("offor_auth")==="1"){PASS=sessionStorage.getItem("offo
 function gather(){var o={};for(var k in CUR){o[k]=CUR[k];}            // preserve extras like _adminHash
   KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)o[k]=el.value;});
   o.reel=REEL.filter(function(x){return x&&x.img;}).map(function(x){return {img:x.img,cap:x.cap||""};});  // photo reel
+  o.hero_photo=HEROP||"";  // main attorney/hero photo (blank = committed default)
   return o;}
 function jsonOf(o){return JSON.stringify(o,null,2)+"\n";}
 function setMsg(t,cls){var m=document.getElementById("msg");m.textContent=t;m.className="msg "+(cls||"");}

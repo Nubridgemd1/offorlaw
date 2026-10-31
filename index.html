@@ -130,20 +130,35 @@
   </div>
 </header>
 
+<style>
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:50px;align-items:center}
+  .hero-grid .hero h1,.hero-grid h1{max-width:none}
+  .hero-portrait{justify-self:end;position:relative}
+  .hero-portrait img{width:100%;max-width:360px;aspect-ratio:4/5;object-fit:cover;border-radius:20px;border:4px solid rgba(255,255,255,.14);box-shadow:0 34px 70px rgba(0,0,0,.45);display:block;background:#0f3160}
+  .hero-portrait figcaption{margin-top:12px;text-align:center;color:rgba(255,255,255,.85);font-size:14px}
+  .hero-portrait figcaption b{display:block;font-family:'Playfair Display',serif;color:#fff;font-size:17px}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero-portrait{justify-self:center}.hero-portrait img{max-width:280px}}
+</style>
 <section class="hero">
-  <div class="wrap">
-    <span class="eyebrow" data-edit="hero_eyebrow">U.S. Immigration Attorneys</span>
-    <h1><span data-edit="hero_title">Trusted immigration counsel for life's most</span> <em data-edit="hero_title_em">important moments</em>.</h1>
-    <p data-edit="hero_sub">Offor Law PLLC delivers dedicated, results‑driven U.S. immigration representation — visas, green cards, citizenship, and removal defense — with the personal attention every client and family deserves.</p>
-    <div class="cta">
-      <a href="#contact" class="btn btn-orange" data-edit="hero_btn1">Book a free consultation</a>
-      <a href="#services" class="btn btn-ghost" data-edit="hero_btn2">Explore our services</a>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow" data-edit="hero_eyebrow">U.S. Immigration Attorneys</span>
+      <h1><span data-edit="hero_title">Trusted immigration counsel for life's most</span> <em data-edit="hero_title_em">important moments</em>.</h1>
+      <p data-edit="hero_sub">Offor Law PLLC delivers dedicated, results‑driven U.S. immigration representation — visas, green cards, citizenship, and removal defense — with the personal attention every client and family deserves.</p>
+      <div class="cta">
+        <a href="#contact" class="btn btn-orange" data-edit="hero_btn1">Book a free consultation</a>
+        <a href="#services" class="btn btn-ghost" data-edit="hero_btn2">Explore our services</a>
+      </div>
+      <div class="trust">
+        <div><b data-edit="stat1_n">100%</b><span data-edit="stat1_l">Immigration focus</span></div>
+        <div><b data-edit="stat2_n">50</b><span data-edit="stat2_l">States served</span></div>
+        <div><b data-edit="stat3_n">1:1</b><span data-edit="stat3_l">Personal attention</span></div>
+      </div>
     </div>
-    <div class="trust">
-      <div><b data-edit="stat1_n">100%</b><span data-edit="stat1_l">Immigration focus</span></div>
-      <div><b data-edit="stat2_n">50</b><span data-edit="stat2_l">States served</span></div>
-      <div><b data-edit="stat3_n">1:1</b><span data-edit="stat3_l">Personal attention</span></div>
-    </div>
+    <figure class="hero-portrait">
+      <img id="heroPhoto" src="assets/attorney.jpg" alt="Perry Ernest Offor, Esq. — Offor Law PLLC">
+      <figcaption><b data-edit="attorney_name">Perry Ernest Offor, Esq.</b><span data-edit="attorney_title">Immigration Attorney · Offor Law PLLC</span></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -280,6 +295,9 @@
       if(c.announcement && c.announcement.trim()){ ann.textContent = c.announcement.trim(); ann.style.display = 'block'; }
       else { ann.style.display = 'none'; }
     }
+    /* Main hero portrait — admin can replace it (stored in content.json, so it updates on every device). */
+    var hp = document.getElementById('heroPhoto');
+    if(hp && typeof c.hero_photo === 'string' && c.hero_photo){ hp.src = c.hero_photo; }
     /* Photo reel — admin-managed pictures from content.json. Section stays hidden until there's at least one. */
     var reel = Array.isArray(c.reel) ? c.reel : [];
     var row = document.getElementById('reelRow'), gsec = document.getElementById('gallery');
