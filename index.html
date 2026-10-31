@@ -510,10 +510,17 @@ function paintUscis(d, live){
   return true;
 }
 function fmtTime(dt){ try{ return dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }catch(e){ return 'just now'; } }
+function uscisGood(d){ return (d && Array.isArray(d.items)) ? d.items.filter(function(it){ return it && it.title && it.link && !USCIS_ENFORCEMENT.test(it.title); }) : []; }
 function renderUscis(){
-  uFetch(USCIS_LIVE_URL, 5000).then(function(live){
-    if(paintUscis(live, true)) return;
-    uFetch('uscis-updates.json?_=' + Date.now(), 5000).then(function(stat){ paintUscis(stat, false); });
+  // Fetch the live (real-time) source and the synced fallback; show whichever has more
+  // substantive (non-enforcement) items. Live wins ties so it stays real-time once the
+  // Worker returns a full pre-filtered list.
+  Promise.all([ uFetch(USCIS_LIVE_URL, 5000), uFetch('uscis-updates.json?_=' + Date.now(), 5000) ]).then(function(r){
+    var live=r[0], stat=r[1];
+    var lg=uscisGood(live).length, sg=uscisGood(stat).length;
+    if(lg >= sg && lg > 0){ paintUscis(live, true); }
+    else if(sg > 0){ paintUscis(stat, false); }
+    else if(lg > 0){ paintUscis(live, true); }
   });
 }
 /* Keep it fresh while the page is open (every 10 minutes). */
