@@ -474,25 +474,47 @@ function closePost(){ var m=document.getElementById('pmodal'); if(m) m.classList
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePost(); });
 (function(){ var m=document.getElementById('pmodal'); if(m) m.addEventListener('click', function(e){ if(e.target===m) closePost(); }); })();
 
-function renderUscis(){
-  fetch('uscis-updates.json?_=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-    if(!d || !Array.isArray(d.items) || !d.items.length) return;
-    var list=document.getElementById('uscisList'), sec=document.getElementById('uscis'), upd=document.getElementById('uscisUpd');
-    if(!list || !sec) return;
-    list.innerHTML = '';
-    d.items.slice(0,8).forEach(function(it){
-      if(!it || !it.title || !it.link) return;
-      var a=document.createElement('a'); a.className='ufeed'; a.href=it.link; a.target='_blank'; a.rel='noopener';
-      var seal=document.createElement('div'); seal.className='seal'; seal.textContent='USCIS'; a.appendChild(seal);
-      var ub=document.createElement('div'); ub.className='ub';
-      var t=document.createElement('div'); t.className='ut'; t.textContent=it.title; ub.appendChild(t);
-      if(it.summary){ var s=document.createElement('div'); s.className='us'; s.textContent=it.summary; ub.appendChild(s); }
-      var dd=document.createElement('div'); dd.className='ud'; dd.textContent=(fmtFeedDate(it.date)? fmtFeedDate(it.date)+' · ':'')+'Read on uscis.gov →'; ub.appendChild(dd);
-      a.appendChild(ub); list.appendChild(a);
-    });
-    if(list.children.length){ sec.style.display=''; if(upd && d.updated){ upd.textContent='Auto-synced from the USCIS newsroom · last updated '+fmtDate(d.updated); } }
-  }).catch(function(){});
+/* Live USCIS endpoint — the Offor Law Worker fetches the official USCIS RSS fresh and returns
+   JSON with CORS. If it is unavailable, we fall back to uscis-updates.json (kept fresh by the
+   scheduled GitHub Action), so the section always shows the latest either way. */
+var USCIS_LIVE_URL = 'https://late-dawn-c4e4.offorlaw-publish.workers.dev/?feed=uscis';
+function uFetch(url, ms){
+  return new Promise(function(resolve){
+    var done=false, to=setTimeout(function(){ if(!done){ done=true; resolve(null); } }, ms||5000);
+    fetch(url, {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){ if(!done){ done=true; clearTimeout(to); resolve(j); } })
+      .catch(function(){ if(!done){ done=true; clearTimeout(to); resolve(null); } });
+  });
 }
+function paintUscis(d, live){
+  if(!d || !Array.isArray(d.items) || !d.items.length) return false;
+  var list=document.getElementById('uscisList'), sec=document.getElementById('uscis'), upd=document.getElementById('uscisUpd');
+  if(!list || !sec) return false;
+  list.innerHTML = '';
+  d.items.slice(0,8).forEach(function(it){
+    if(!it || !it.title || !it.link) return;
+    var a=document.createElement('a'); a.className='ufeed'; a.href=it.link; a.target='_blank'; a.rel='noopener';
+    var seal=document.createElement('div'); seal.className='seal'; seal.textContent='USCIS'; a.appendChild(seal);
+    var ub=document.createElement('div'); ub.className='ub';
+    var t=document.createElement('div'); t.className='ut'; t.textContent=it.title; ub.appendChild(t);
+    if(it.summary){ var s=document.createElement('div'); s.className='us'; s.textContent=it.summary; ub.appendChild(s); }
+    var dd=document.createElement('div'); dd.className='ud'; dd.textContent=(fmtFeedDate(it.date)? fmtFeedDate(it.date)+' · ':'')+'Read on uscis.gov →'; ub.appendChild(dd);
+    a.appendChild(ub); list.appendChild(a);
+  });
+  if(!list.children.length) return false;
+  sec.style.display='';
+  if(upd){ upd.textContent = live ? 'Live from the USCIS newsroom · refreshed '+fmtTime(new Date()) : ('Auto-synced from the USCIS newsroom · last updated '+fmtDate(d.updated)); }
+  return true;
+}
+function fmtTime(dt){ try{ return dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }catch(e){ return 'just now'; } }
+function renderUscis(){
+  uFetch(USCIS_LIVE_URL, 5000).then(function(live){
+    if(paintUscis(live, true)) return;
+    uFetch('uscis-updates.json?_=' + Date.now(), 5000).then(function(stat){ paintUscis(stat, false); });
+  });
+}
+/* Keep it fresh while the page is open (every 10 minutes). */
+setInterval(renderUscis, 600000);
 </script>
 
 </body>
