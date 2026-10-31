@@ -1,0 +1,72 @@
+name: USCIS feed sync
+
+# Pulls the official USCIS "All News" RSS feed and publishes the latest items to
+# gh-pages as uscis-updates.json, which offorlaw.com reads for its "Latest from
+# USCIS" section. Runs on a schedule (default branch required for cron) and can
+# be run on demand from the Actions tab.
+
+on:
+  schedule:
+    - cron: '23 12 * * *'   # daily ~12:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uscis-feed
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Build uscis-updates.json from the USCIS feed
+        run: |
+          cat > fetch-uscis.mjs <<'EOF'
+          import fs from 'fs';
+          const FEED = 'https://www.uscis.gov/news/rss-feed/59144';
+          const res = await fetch(FEED, { headers: { 'User-Agent': 'offorlaw-uscis-sync' } });
+          if (!res.ok) { console.log('feed HTTP ' + res.status + '; leaving file unchanged'); process.exit(0); }
+          const xml = await res.text();
+          const dec = s => (s||'')
+            .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"')
+            .replace(/&#39;/g,"'").replace(/&amp;/g,'&')
+            .replace(/\s+/g,' ').trim();
+          const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(m => m[1]);
+          const g = (b, re) => { const m = b.match(re); return m ? dec(m[1]) : ''; };
+          const out = items.slice(0, 8).map(b => {
+            let d = g(b, /<description>([\s\S]*?)<\/description>/i);
+            if (d.length > 230) d = d.slice(0, 227) + '…';
+            return { title: g(b, /<title>([\s\S]*?)<\/title>/i), link: g(b, /<link>([\s\S]*?)<\/link>/i), date: g(b, /<pubDate>([\s\S]*?)<\/pubDate>/i), summary: d };
+          }).filter(x => x.title && x.link);
+          if (!out.length) { console.log('no items parsed; leaving file unchanged'); process.exit(0); }
+          let prev = '';
+          try { prev = JSON.stringify((JSON.parse(fs.readFileSync('uscis-updates.json','utf8')).items) || []); } catch {}
+          if (JSON.stringify(out) === prev) { console.log('no change in USCIS items'); process.exit(0); }
+          const data = { source: 'USCIS — All News', feed: FEED, updated: new Date().toISOString(), items: out };
+          fs.writeFileSync('uscis-updates.json', JSON.stringify(data, null, 2) + '\n');
+          console.log('wrote ' + out.length + ' USCIS items');
+          EOF
+          node fetch-uscis.mjs
+          rm -f fetch-uscis.mjs
+
+      - name: Commit & push if changed
+        run: |
+          if [ -n "$(git status --porcelain uscis-updates.json)" ]; then
+            git config user.name "uscis-sync-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add uscis-updates.json
+            git commit -m "chore: sync latest USCIS updates [skip ci]"
+            git push
+            echo "Published updated USCIS feed."
+          else
+            echo "No USCIS changes."
+          fi
