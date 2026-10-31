@@ -7,7 +7,7 @@ name: USCIS feed sync
 
 on:
   schedule:
-    - cron: '23 12 * * *'   # daily ~12:23 UTC
+    - cron: '17 * * * *'      # hourly backstop (live fetch handles real-time)
   workflow_dispatch:
 
 permissions:
