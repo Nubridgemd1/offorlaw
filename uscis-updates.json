@@ -1,20 +1,8 @@
 {
-  "source": "USCIS — All News",
+  "source": "USCIS — News & Policy",
   "feed": "https://www.uscis.gov/news/rss-feed/59144",
-  "updated": "2026-10-31T01:08:17.363Z",
+  "updated": "2026-10-31T01:56:47.536Z",
   "items": [
-    {
-      "title": "Under President Trump’s Leadership, USCIS Takes Unprecedented 2.2 Million Enforcement Actions Protecting Americans Across the Nation",
-      "link": "https://www.uscis.gov/newsroom/news-releases/under-president-trumps-leadership-uscis-takes-unprecedented-22-million-enforcement-actions",
-      "date": "Thu, 29 Oct 26 14:41:29 -0400",
-      "summary": "Under the leadership of President Donald J. Trump and Secretary of Homeland Security Markwayne Mullin, U.S. Citizenship and Immigration Services is delivering on the Administration’s agenda and putting the American people first."
-    },
-    {
-      "title": "Suburban Chicago Man Sentenced for Staging Robberies to Help Others Fraudulently Apply for Immigration Visas",
-      "link": "https://www.uscis.gov/newsroom/news-releases/suburban-chicago-man-sentenced-for-staging-robberies-to-help-others-fraudulently-apply-for",
-      "date": "Wed, 28 Oct 26 15:18:03 -0400",
-      "summary": "A suburban Chicago man has been sentenced to two years in federal prison for conspiring to stage armed robberies so purported victims could apply for U.S. immigration visas reserved for crime victims."
-    },
     {
       "title": "Litigation-Related Update: Sileiri Doe Class Members May Request Reopening or Reconsideration of an Adverse Decision Without a Fee",
       "link": "https://www.uscis.gov/newsroom/alerts/litigation-related-update-sileiri-doe-class-members-may-request-reopening-or-reconsideration-of-an",
@@ -22,34 +10,46 @@
       "summary": "On Sept. 28, 2026, the U.S. District Court for the District of Massachusetts issued an order requiring DHS to remediate certain adverse consequences for the class of aliens paroled into the United States after scheduling an app…"
     },
     {
-      "title": "Aliens in Idaho Charged for Illegal Voting",
-      "link": "https://www.uscis.gov/newsroom/news-releases/aliens-in-idaho-charged-for-illegal-voting",
-      "date": "Thu, 22 Oct 26 16:01:51 -0400",
-      "summary": "U.S. Citizenship and Immigration Services assisted an investigation that resulted in charges against two Canadian aliens residing in eastern Idaho for unlawfully voting in the 2022 general election."
+      "title": "USCIS Opens Asylum Office in Charlotte",
+      "link": "https://www.uscis.gov/newsroom/alerts/uscis-opens-asylum-office-in-charlotte",
+      "date": "Fri, 09 Oct 26 13:08:41 -0400",
+      "summary": "U.S. Citizenship and Immigration Services&nbsp;(USCIS)&nbsp;is&nbsp;opening an&nbsp;asylum office&nbsp;in&nbsp;Charlotte, North Carolina."
     },
     {
-      "title": "Grocery Store Manager Convicted of Immigration Document Fraud, Obstruction of Two Federal Labor Investigations, and Conspiracy",
-      "link": "https://www.uscis.gov/newsroom/news-releases/grocery-store-manager-convicted-of-immigration-document-fraud-obstruction-of-two-federal-labor",
-      "date": "Thu, 22 Oct 26 15:35:23 -0400",
-      "summary": "U.S. Citizenship and Immigration Services provided pivotal assistance to the case resulting in the conviction of Karla Montoya, 45, of Sacramento."
+      "title": "USCIS Announces FY 2027 Inflation Increase for Certain Immigration-Related Fees",
+      "link": "https://www.uscis.gov/newsroom/alerts/uscis-announces-fy-2027-inflation-increase-for-certain-immigration-related-fees",
+      "date": "Wed, 30 Sep 26 09:18:11 -0400",
+      "summary": "U.S. Citizenship and Immigration Services has issued a&nbsp;Federal Register notice&nbsp;that will increase certain H.R. 1 immigration-related fees for fiscal year 2027."
     },
     {
-      "title": "Six Charged in Large-Scale Marriage Fraud Ring",
-      "link": "https://www.uscis.gov/newsroom/news-releases/six-charged-in-large-scale-marriage-fraud-ring",
-      "date": "Thu, 22 Oct 26 15:25:51 -0400",
-      "summary": "Six individuals in Massachusetts have been charged with allegedly arranging sham marriages&nbsp;to fraudulently obtain immigration status for illegal aliens."
+      "title": "USCIS Adjusts EB-5 Fees to Cover Program Costs and Strengthen Integrity Measures",
+      "link": "https://www.uscis.gov/newsroom/alerts/uscis-adjusts-eb-5-fees-to-cover-program-costs-and-strengthen-integrity-measures",
+      "date": "Tue, 29 Sep 26 09:29:41 -0400",
+      "summary": "U.S. Citizenship and Immigration Services (USCIS) is updating fees for the EB-5 Immigrant Investor Program to&nbsp;ensure EB-5 fees fully recover the cost of operating the program, meet statutory processing time goals, and supp…"
     },
     {
-      "title": "Alien from South Africa Charged with Unlawful Voting",
-      "link": "https://www.uscis.gov/newsroom/news-releases/alien-from-south-africa-charged-with-unlawful-voting",
-      "date": "Thu, 22 Oct 26 09:46:58 -0400",
-      "summary": "A South African alien and lawful permanent resident was charged with unlawfully voting in the November 2024 federal election. U.S. Citizenship and Immigration Services provided valuable assistance during the investigation."
+      "title": "USCIS Reaches H-2B Cap for First Half of FY 2027",
+      "link": "https://www.uscis.gov/newsroom/alerts/uscis-reaches-h-2b-cap-for-first-half-of-fy-2027",
+      "date": "Fri, 11 Sep 26 09:40:20 -0400",
+      "summary": "U.S. Citizenship and Immigration Services received enough petitions to meet the congressionally established&nbsp;H-2B cap for the first half of fiscal year (FY) 2027."
     },
     {
-      "title": "Canadian Alien Charged with Illegal Voting",
-      "link": "https://www.uscis.gov/newsroom/news-releases/canadian-alien-charged-with-illegal-voting",
-      "date": "Tue, 20 Oct 26 15:16:50 -0400",
-      "summary": "A grand jury returned an indictment charging Sandra Madeline Watson, 59, of Louisville, with illegal voting by an alien in a federal election."
+      "title": "DHS Announces Rule for Certain Children Born in the United States to Foreign Government Employees",
+      "link": "https://www.uscis.gov/newsroom/alerts/dhs-announces-rule-for-certain-children-born-in-the-united-states-to-foreign-government-employees",
+      "date": "Fri, 04 Sep 26 18:26:12 -0400",
+      "summary": "The Department of Homeland Security today issued an&nbsp;interim final rule amending its regulations to allow certain children born in the United States to foreign government employees who are not U.S. citizens to register as l…"
+    },
+    {
+      "title": "Court Order on Diversity Immigrant Visa Program Hold Policy",
+      "link": "https://www.uscis.gov/newsroom/alerts/court-order-on-diversity-immigrant-visa-program-hold-policy",
+      "date": "Fri, 04 Sep 26 13:40:27 -0400",
+      "summary": "On Aug. 28, 2026, the U.S. District Court for the Northern District of California issued an order in&nbsp;Medani, et al., v. Trump, et al.,&nbsp;26-cv-6332 (NDCA), temporarily vacating PM-602-0193 pending further litigation. US…"
+    },
+    {
+      "title": "Recent Court Order on Hold Policies",
+      "link": "https://www.uscis.gov/newsroom/alerts/recent-court-order-on-hold-policies",
+      "date": "Fri, 28 Aug 26 14:23:49 -0400",
+      "summary": "On Aug. 24, 2026, the U.S. District Court for the Northern District of California issued an order in&nbsp;Red Eagle Law, L.C., et al., v. Joseph B. Edlow, 26-cv-04850-CRB (NDCA), enjoining PM 602-0192, and PM 602-0194."
     }
   ]
 }

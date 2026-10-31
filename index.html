@@ -486,12 +486,15 @@ function uFetch(url, ms){
       .catch(function(){ if(!done){ done=true; clearTimeout(to); resolve(null); } });
   });
 }
+var USCIS_ENFORCEMENT = /\b(charged|charges|convicted|sentenced|arrested|arrest|guilty|pleads?|indicted?|indictment|fraud|smuggl\w*|traffick\w*|prison|conspiracy|prosecut\w*|defendant|felony|felon|crimin\w*|terrorist|deport\w*|cartel|gang)\b|enforcement action|unlawful voting|illegal voting|strip citizenship|denaturaliz\w*|ms-13/i;
 function paintUscis(d, live){
-  if(!d || !Array.isArray(d.items) || !d.items.length) return false;
+  if(!d || !Array.isArray(d.items)) return false;
+  var items = d.items.filter(function(it){ return it && it.title && it.link && !USCIS_ENFORCEMENT.test(it.title); });
+  if(!items.length) return false;
   var list=document.getElementById('uscisList'), sec=document.getElementById('uscis'), upd=document.getElementById('uscisUpd');
   if(!list || !sec) return false;
   list.innerHTML = '';
-  d.items.slice(0,8).forEach(function(it){
+  items.slice(0,8).forEach(function(it){
     if(!it || !it.title || !it.link) return;
     var a=document.createElement('a'); a.className='ufeed'; a.href=it.link; a.target='_blank'; a.rel='noopener';
     var seal=document.createElement('div'); seal.className='seal'; seal.textContent='USCIS'; a.appendChild(seal);
