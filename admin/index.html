@@ -50,6 +50,20 @@
   code{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
   details.inner summary{cursor:pointer;font-size:13px;color:var(--navy);font-weight:600;margin-top:6px}
   @media(max-width:560px){.two{grid-template-columns:1fr}}
+  /* photo reel manager */
+  .reelAdd{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 14px}
+  .filebtn{cursor:pointer}
+  .urlrow{display:flex;gap:8px;flex:1;min-width:220px}
+  .urlrow input{flex:1}
+  .reelList{display:flex;flex-direction:column;gap:10px}
+  .reelItem{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}
+  .reelItem img{width:76px;height:60px;object-fit:cover;border-radius:8px;flex:none;background:var(--soft);border:1px solid var(--line)}
+  .ri-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .ri-cap{width:100%}
+  .ri-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .btn.mini{padding:6px 12px;font-size:12.5px}
+  .btn.mini.danger{color:var(--red);border-color:#f0c9c4}
+  .reelEmpty{color:var(--ink3);font-size:13px}
 </style></head><body>
 
 <div id="gate">
@@ -69,6 +83,7 @@
 <div class="wrap">
   <p class="note" style="margin:2px 0 14px">Edit any section below, then press <b>Save &amp; Publish</b>. Changes go live on offorlaw.com in about a minute. Empty a field to restore its built‑in default.</p>
   <div id="form"></div>
+  <div id="reelMgr"></div>
 
   <details class="sec" id="sec-settings">
     <summary>Settings <span class="chev">Passcode &amp; publishing ▾</span></summary>
@@ -123,6 +138,8 @@ var SCHEMA=[
     ["why1_n","Item 1 — number"],["why1_t","Item 1 — title"],["why1_d","Item 1 — text","area"],
     ["why2_n","Item 2 — number"],["why2_t","Item 2 — title"],["why2_d","Item 2 — text","area"],
     ["why3_n","Item 3 — number"],["why3_t","Item 3 — title"],["why3_d","Item 3 — text","area"]]},
+  {t:"Photo Reel (headings)", f:[
+    ["gallery_kicker","Section kicker"],["gallery_title","Section title"],["gallery_sub","Section intro","area"]]},
   {t:"Call to Action", f:[
     ["cta_title","Title"],["cta_sub","Subtitle"],["cta_btn","Button"]]},
   {t:"Contact & Footer", f:[
@@ -143,11 +160,64 @@ document.getElementById("form").innerHTML=SCHEMA.map(function(s){
 }).join("");
 
 /* ---- auth (supports a published hash so a changed passcode works on any device) ---- */
-var CUR={}, CURP;
+var CUR={}, CURP, REEL=[];
 function loadContent(){CURP=fetch("/"+PATH+"?_="+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(c){
-  CUR=c||{};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(typeof CUR[k]==="string")?CUR[k]:"";});return CUR;
-}).catch(function(){CUR={};return CUR;});return CURP;}
+  CUR=c||{};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(typeof CUR[k]==="string")?CUR[k]:"";});
+  REEL=Array.isArray(CUR.reel)?CUR.reel.map(function(x){return {img:(x&&x.img)||"",cap:(x&&x.cap)||""};}).filter(function(x){return x.img;}):[];
+  renderReel();
+  return CUR;
+}).catch(function(){CUR={};renderReel();return CUR;});return CURP;}
 loadContent();
+
+/* ---- photo reel manager (uploads publish inside content.json, so they go live on any device) ---- */
+function renderReel(){
+  var el=document.getElementById("reelMgr");if(!el)return;
+  var list=REEL.map(function(it,i){
+    return '<div class="reelItem"><img src="'+esc(it.img)+'" alt="">'
+      +'<div class="ri-body"><input class="ri-cap" placeholder="Caption (optional)" value="'+esc(it.cap)+'" oninput="reelCap('+i+',this.value)">'
+      +'<div class="ri-actions">'
+      +'<button type="button" class="btn btn-ghost mini" onclick="reelMove('+i+',-1)">↑ Up</button>'
+      +'<button type="button" class="btn btn-ghost mini" onclick="reelMove('+i+',1)">↓ Down</button>'
+      +'<button type="button" class="btn btn-ghost mini danger" onclick="reelDel('+i+')">Remove</button>'
+      +'</div></div></div>';
+  }).join("");
+  el.innerHTML='<details class="sec" id="sec-reel" open><summary>Photo Reel — pictures <span class="chev">Upload from any device ▾</span></summary><div class="body">'
+    +'<p class="note">Add photos of the firm — they show in a scrolling reel on the homepage. Upload straight from this device (your phone’s camera or gallery works too). Pictures go live for <b>everyone, on every device</b> when you press <b>Save &amp; Publish</b>.</p>'
+    +'<div class="reelAdd"><label class="btn btn-o filebtn">＋ Add pictures<input type="file" accept="image/*" multiple style="display:none" onchange="addReelFiles(this)"></label>'
+    +'<div class="urlrow"><input id="reelUrl" placeholder="…or paste an image URL"><button type="button" class="btn btn-ghost" onclick="addReelUrl()">Add</button></div></div>'
+    +'<div class="reelList">'+(list||'<p class="reelEmpty">No pictures yet — add your first above.</p>')+'</div>'
+    +'<p class="note" style="margin-top:12px">'+REEL.length+' picture(s). Photos are auto‑resized for the web. Tip: keep it to ~5–8 for a fast‑loading reel.</p>'
+    +'</div></details>';
+}
+function compressImg(file,cb){
+  var fr=new FileReader();
+  fr.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var max=1100,w=img.width,h=img.height;
+      if(w>max||h>max){ if(w>=h){h=Math.round(h*max/w);w=max;} else {w=Math.round(w*max/h);h=max;} }
+      try{var cv=document.createElement("canvas");cv.width=w;cv.height=h;cv.getContext("2d").drawImage(img,0,0,w,h);cb(cv.toDataURL("image/jpeg",0.74));}
+      catch(e){cb(fr.result);}
+    };
+    img.onerror=function(){cb(fr.result);};
+    img.src=fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+function addReelFiles(input){
+  var files=input.files;if(!files||!files.length)return;
+  var arr=Array.prototype.slice.call(files),pending=arr.length;
+  setMsg("Processing "+arr.length+" picture(s)…","");
+  arr.forEach(function(f){
+    if(!/^image\//.test(f.type)){pending--;return;}
+    compressImg(f,function(d){REEL.push({img:d,cap:""});pending--;if(pending<=0){renderReel();setMsg("Added. Press Save & Publish to go live on all devices.","ok");}});
+  });
+  input.value="";
+}
+function addReelUrl(){var i=document.getElementById("reelUrl");if(!i)return;var v=(i.value||"").trim();if(!v){return;}REEL.push({img:v,cap:""});i.value="";renderReel();setMsg("Added. Press Save & Publish to go live.","ok");}
+function reelCap(i,v){if(REEL[i])REEL[i].cap=v;}
+function reelDel(i){REEL.splice(i,1);renderReel();}
+function reelMove(i,d){var j=i+d;if(j<0||j>=REEL.length)return;var t=REEL[i];REEL[i]=REEL[j];REEL[j]=t;renderReel();}
 
 function sha256(str){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)).then(function(buf){
   return Array.prototype.map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,"0");}).join("");});}
@@ -163,7 +233,9 @@ if(sessionStorage.getItem("offor_auth")==="1"){PASS=sessionStorage.getItem("offo
 
 /* ---- gather / publish ---- */
 function gather(){var o={};for(var k in CUR){o[k]=CUR[k];}            // preserve extras like _adminHash
-  KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)o[k]=el.value;});return o;}
+  KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)o[k]=el.value;});
+  o.reel=REEL.filter(function(x){return x&&x.img;}).map(function(x){return {img:x.img,cap:x.cap||""};});  // photo reel
+  return o;}
 function jsonOf(o){return JSON.stringify(o,null,2)+"\n";}
 function setMsg(t,cls){var m=document.getElementById("msg");m.textContent=t;m.className="msg "+(cls||"");}
 
