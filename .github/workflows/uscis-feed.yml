@@ -42,16 +42,17 @@ jobs:
             .replace(/\s+/g,' ').trim();
           const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(m => m[1]);
           const g = (b, re) => { const m = b.match(re); return m ? dec(m[1]) : ''; };
-          const out = items.slice(0, 8).map(b => {
+          const EN = /\b(charged|charges|convicted|sentenced|arrested|arrest|guilty|pleads?|indicted?|indictment|fraud|smuggl\w*|traffick\w*|prison|conspiracy|prosecut\w*|defendant|felony|felon|crimin\w*|terrorist|deport\w*|cartel|gang)\b|enforcement action|unlawful voting|illegal voting|strip citizenship|denaturaliz\w*|ms-13/i;
+          const out = items.map(b => {
             let d = g(b, /<description>([\s\S]*?)<\/description>/i);
             if (d.length > 230) d = d.slice(0, 227) + '…';
             return { title: g(b, /<title>([\s\S]*?)<\/title>/i), link: g(b, /<link>([\s\S]*?)<\/link>/i), date: g(b, /<pubDate>([\s\S]*?)<\/pubDate>/i), summary: d };
-          }).filter(x => x.title && x.link);
+          }).filter(x => x.title && x.link && !EN.test(x.title)).slice(0, 8);
           if (!out.length) { console.log('no items parsed; leaving file unchanged'); process.exit(0); }
           let prev = '';
           try { prev = JSON.stringify((JSON.parse(fs.readFileSync('uscis-updates.json','utf8')).items) || []); } catch {}
           if (JSON.stringify(out) === prev) { console.log('no change in USCIS items'); process.exit(0); }
-          const data = { source: 'USCIS — All News', feed: FEED, updated: new Date().toISOString(), items: out };
+          const data = { source: 'USCIS — News & Policy', feed: FEED, updated: new Date().toISOString(), items: out };
           fs.writeFileSync('uscis-updates.json', JSON.stringify(data, null, 2) + '\n');
           console.log('wrote ' + out.length + ' USCIS items');
           EOF
