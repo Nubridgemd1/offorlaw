@@ -58,5 +58,93 @@
   "address_line2": "Dallas, TX 75244",
   "footer_blurb": "Dedicated U.S. immigration representation — visas, green cards, citizenship, and removal defense — with the personal attention you deserve.",
   "footer_copyright": "© 2026 Offor Law PLLC. All rights reserved.",
-  "footer_disclaimer": "Attorney advertising. The information on this website is for general informational purposes only and is not legal advice. Viewing this site or contacting the firm does not create an attorney‑client relationship. Prior results do not guarantee a similar outcome."
+  "footer_disclaimer": "Attorney advertising. The information on this website is for general informational purposes only and is not legal advice. Viewing this site or contacting the firm does not create an attorney‑client relationship. Prior results do not guarantee a similar outcome.",
+  "posts": [
+    {
+      "id": "check-case-status",
+      "cat": "Case Status",
+      "date": "2026-10-18",
+      "title": "How to Check Your USCIS Case Status Online",
+      "summary": "Track any pending application with your receipt number — plus how to read what each status actually means.",
+      "body": "Every application or petition USCIS accepts is assigned a 13-character receipt number that begins with three letters (for example IOE, MSC, EAC or WAC). You can enter that number at the official Case Status Online tool on uscis.gov to see where your case stands.\n\nThe status you see — such as \"Case Was Received,\" \"Request for Additional Evidence Was Sent,\" \"Interview Was Scheduled,\" or \"Card Was Mailed To Me\" — tells you the last action USCIS took, not an estimated decision date. Create a free USCIS online account to get automatic email or text alerts whenever the status changes.\n\nIf your case has been pending longer than the posted processing time for your form and office, you may be able to submit an inquiry (\"case outside normal processing time\"). When a case is truly stuck, speak with an attorney about your options before filing anything new."
+    },
+    {
+      "id": "visa-bulletin",
+      "cat": "Green Cards",
+      "date": "2026-10-02",
+      "title": "Reading the Visa Bulletin: Priority Dates Explained",
+      "summary": "Why green-card applicants wait, how priority dates work, and the difference between the two charts each month.",
+      "body": "Most family- and employment-based green cards are limited in number each year, so applicants line up by their \"priority date\" — generally the date USCIS received the underlying petition. The Department of State publishes a monthly Visa Bulletin showing which priority dates have reached the front of the line.\n\nEach month the bulletin lists two charts: \"Final Action Dates\" (when a green card can actually be approved) and \"Dates for Filing\" (when you may submit your application paperwork). USCIS announces which chart to use for adjustment of status that month. Your date is \"current\" when it is earlier than the cutoff for your category and country.\n\nPriority dates can move forward, stall, or even retrogress as demand shifts. Keep your petition and addresses up to date so you are ready to act the moment your date becomes current."
+    },
+    {
+      "id": "adjustment-of-status",
+      "cat": "Green Cards",
+      "date": "2026-09-20",
+      "title": "Adjustment of Status (Form I-485): A Step-by-Step Overview",
+      "summary": "How eligible applicants already in the U.S. can become permanent residents without leaving the country.",
+      "body": "Adjustment of status is the process of applying for a green card while you are physically present in the United States, using Form I-485. It is available when a visa is immediately available to you and you are otherwise eligible — commonly through a family member, an employer, or another qualifying category.\n\nA typical filing includes the I-485 along with supporting evidence, and often concurrent requests for a work permit (Form I-765) and travel permission (Form I-131). After filing you will attend a biometrics appointment, and many applicants are scheduled for an interview at a local field office.\n\nTravel and employment while your case is pending carry rules of their own — leaving the country without advance parole can abandon your application. Review your specific situation with counsel before you file or make travel plans."
+    },
+    {
+      "id": "family-green-cards",
+      "cat": "Family",
+      "date": "2026-09-05",
+      "title": "Family-Based Green Cards: Who You Can Sponsor",
+      "summary": "The difference between immediate relatives and preference categories — and how it affects your wait.",
+      "body": "U.S. citizens and lawful permanent residents can petition for certain family members using Form I-130. Who qualifies, and how long the wait is, depends on your status and your relationship to the relative.\n\n\"Immediate relatives\" of U.S. citizens — spouses, unmarried children under 21, and parents — have no annual cap, so a visa is always available. Other relationships fall into \"family preference\" categories that are capped each year, including adult children, married children, and siblings of citizens, and spouses and children of permanent residents.\n\nFiling the I-130 establishes the relationship and your place in line; a separate step grants the green card once a visa is available. Getting the category and evidence right from the start avoids costly delays."
+    },
+    {
+      "id": "marriage-green-card",
+      "cat": "Family",
+      "date": "2026-08-22",
+      "title": "The Marriage-Based Green Card Process and Interview",
+      "summary": "From the I-130 petition to the interview — what the process looks like and how to prepare.",
+      "body": "A green card through marriage to a U.S. citizen or permanent resident is one of the most common paths to residency. The process generally pairs a Form I-130 (proving a genuine marriage) with either adjustment of status inside the U.S. or consular processing abroad.\n\nOfficers look for evidence that the marriage is real — joint finances, a shared lease or mortgage, insurance, photos over time, and affidavits can all help. Most couples attend an interview where an officer asks about their relationship and history.\n\nIf you married recently, the first green card may be \"conditional\" and valid for two years, requiring a later joint petition (Form I-751) to remove conditions. Preparing thorough, organized evidence is the single best way to a smooth interview."
+    },
+    {
+      "id": "naturalization-n400",
+      "cat": "Citizenship",
+      "date": "2026-08-08",
+      "title": "Becoming a U.S. Citizen: The N-400 Naturalization Process",
+      "summary": "Eligibility basics, the English and civics tests, and what happens at your citizenship interview.",
+      "body": "Naturalization is the process by which a lawful permanent resident becomes a U.S. citizen, using Form N-400. Most applicants qualify after five years as a permanent resident (three years if married to and living with a U.S. citizen), along with continuous residence and physical presence, good moral character, and the ability to meet the testing requirements.\n\nAt the interview, an officer reviews your application and administers an English test (reading, writing and speaking) and a civics test on U.S. history and government. Certain older, long-time residents may qualify for exemptions or accommodations.\n\nIf approved, you take the Oath of Allegiance at a naturalization ceremony and receive your Certificate of Naturalization. Citizenship brings the right to vote, a U.S. passport, and the ability to petition for more family members."
+    },
+    {
+      "id": "work-authorization-ead",
+      "cat": "Work",
+      "date": "2026-07-21",
+      "title": "Employment Authorization (EAD): Who Qualifies and How to Apply",
+      "summary": "The work permit explained — who can get one, how to file Form I-765, and how renewals work.",
+      "body": "An Employment Authorization Document (EAD) is the card that lets many noncitizens work legally in the United States. You apply with Form I-765, and eligibility depends on your category — for example, adjustment-of-status applicants, asylum seekers, certain students, and others.\n\nSome people need an EAD to work at all, while others (like green-card holders) already have work authorization from their status. The card is issued for a set period and must be renewed before it expires; filing early matters because gaps in authorization can interrupt employment.\n\nEach category has its own rules about when you can file and whether a fee applies. Confirm your eligibility category before filing so your application is not rejected or delayed."
+    },
+    {
+      "id": "work-visas-overview",
+      "cat": "Work",
+      "date": "2026-07-03",
+      "title": "Work Visas Explained: H-1B, L-1, O-1 and TN",
+      "summary": "A quick guide to the most common temporary work visas and the kind of worker each is built for.",
+      "body": "The U.S. offers several temporary (nonimmigrant) work visas, each designed for a different situation. Choosing the right category — and meeting its specific requirements — is the foundation of a successful petition.\n\nThe H-1B is for specialty occupations that normally require at least a bachelor’s degree and is subject to an annual cap and lottery. The L-1 lets multinational companies transfer managers, executives, or employees with specialized knowledge. The O-1 is for individuals with extraordinary ability or achievement. The TN, under the USMCA, is available to qualifying Canadian and Mexican professionals in listed occupations.\n\nSome of these paths can also lead toward permanent residency. The best option depends on your role, employer, country, and timeline — a short planning conversation can save months."
+    },
+    {
+      "id": "asylum-one-year",
+      "cat": "Humanitarian",
+      "date": "2026-06-14",
+      "title": "Seeking Asylum: The One-Year Filing Deadline and Process",
+      "summary": "Who may qualify for asylum, the critical one-year deadline, and the difference between the two paths.",
+      "body": "Asylum protects people already in the United States who fear persecution in their home country on account of race, religion, nationality, political opinion, or membership in a particular social group. It is requested on Form I-589.\n\nA key rule: you generally must apply within one year of your last arrival in the U.S., though limited exceptions exist for changed or extraordinary circumstances. Missing the deadline can bar a claim, so timing matters.\n\nThere are two tracks — \"affirmative\" asylum filed with USCIS, and \"defensive\" asylum raised in immigration court. Both turn on detailed, credible evidence of the harm feared. Because the stakes are so high, experienced representation can make a real difference."
+    },
+    {
+      "id": "responding-to-rfe",
+      "cat": "Process",
+      "date": "2026-05-29",
+      "title": "Received an RFE? How to Respond Without Panic",
+      "summary": "A Request for Evidence is not a denial — here is what it means and how to answer it effectively.",
+      "body": "A Request for Evidence (RFE) means USCIS needs more information before it can decide your case. It is not a denial, and a well-prepared response often leads to approval. Read it carefully: it lists exactly what is missing and a firm deadline to reply.\n\nRespond fully and on time, addressing every point the notice raises with clear documents and, where helpful, a cover letter that explains how the evidence satisfies the requirement. Send everything together in one package — partial responses are decided on what USCIS has.\n\nMissing the deadline can result in denial, so start early. If the request is complex or touches on eligibility, an attorney can help you frame the strongest possible response."
+    }
+  ],
+  "blog_kicker": "Immigration Insights",
+  "blog_title": "Guides & updates for your case",
+  "blog_sub": "Clear, practical explainers on the immigration topics clients ask about most. General information — not legal advice.",
+  "uscis_kicker": "Straight from USCIS",
+  "uscis_title": "Latest from USCIS",
+  "uscis_sub": "Official announcements pulled automatically from the USCIS newsroom. Tap any item to read the full release on uscis.gov."
 }

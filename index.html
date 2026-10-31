@@ -121,6 +121,7 @@
     <nav class="links">
       <a href="#services">Services</a>
       <a href="#about">Attorney</a>
+      <a href="#blog">Blog</a>
       <a href="#why">Why Us</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -251,6 +252,72 @@
   </div>
 </section>
 
+<style>
+  .bloggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.bloggrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.bloggrid{grid-template-columns:1fr}}
+  .pcard{text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;cursor:pointer;transition:.18s;display:flex;flex-direction:column;min-width:0;font:inherit;color:inherit}
+  .pcard:hover{border-color:var(--orange);box-shadow:0 18px 44px rgba(10,35,66,.10);transform:translateY(-4px)}
+  .pcard .pcat{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);background:var(--orange-soft);border-radius:999px;padding:5px 12px}
+  .pcard h3{font-size:19px;margin:14px 0 8px;line-height:1.25}
+  .pcard p{color:var(--ink3);font-size:14.5px;margin:0}
+  .pcard .pdate{margin-top:14px;font-size:12.5px;color:var(--ink3)}
+  .pcard .pmore{margin-top:4px;color:var(--orange);font-weight:600;font-size:13.5px}
+  /* USCIS feed */
+  .uscislist{display:flex;flex-direction:column;gap:12px}
+  .ufeed{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none;transition:.16s;align-items:flex-start}
+  .ufeed:hover{border-color:var(--orange);box-shadow:0 12px 30px rgba(10,35,66,.08)}
+  .ufeed .seal{width:40px;height:40px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;flex:none;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;letter-spacing:.02em}
+  .ufeed .ub{min-width:0}
+  .ufeed .ut{font-family:'Playfair Display',serif;color:var(--navy);font-size:16.5px;font-weight:600;line-height:1.3}
+  .ufeed .us{color:var(--ink3);font-size:13.5px;margin-top:5px}
+  .ufeed .ud{color:var(--orange);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:7px}
+  .uscis-upd{margin-top:16px;font-size:12.5px;color:var(--ink3);text-align:center}
+  /* post reader modal */
+  .pmodal{position:fixed;inset:0;z-index:60;background:rgba(7,26,51,.62);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:4vh 16px}
+  .pmodal.open{display:flex}
+  .pmbox{background:#fff;border-radius:18px;max-width:720px;width:100%;position:relative;box-shadow:0 40px 90px rgba(0,0,0,.45);margin:auto}
+  .pmx{position:absolute;right:14px;top:12px;width:38px;height:38px;border-radius:50%;border:0;background:var(--soft);color:var(--navy);font-size:22px;cursor:pointer;line-height:1}
+  .pmpad{padding:40px 38px 34px}
+  @media(max-width:560px){.pmpad{padding:30px 22px 26px}}
+  .pmpad .pcat{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);background:var(--orange-soft);border-radius:999px;padding:5px 12px}
+  .pmpad h1{font-size:clamp(25px,4vw,34px);margin:14px 0 8px}
+  .pmpad .pmeta{color:var(--ink3);font-size:13.5px;margin-bottom:18px}
+  .pmpad .pbody p{color:var(--ink);font-size:16.5px;line-height:1.7;margin:0 0 15px}
+  .pmpad .pdisc{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3)}
+  .pmshare{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+  .pmshare .lbl{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-right:4px}
+  .shico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;text-decoration:none;border:0;cursor:pointer}
+  .shico svg{width:18px;height:18px;fill:#fff}
+  .shmsg2{font-size:12.5px;color:var(--orange);font-weight:600;margin-left:6px}
+</style>
+<section class="sec" id="blog" style="display:none">
+  <div class="wrap">
+    <div class="head">
+      <div class="k" data-edit="blog_kicker">Immigration Insights</div>
+      <h2 data-edit="blog_title">Guides &amp; updates for your case</h2>
+      <p data-edit="blog_sub">Clear, practical explainers on the immigration topics clients ask about most. General information — not legal advice.</p>
+    </div>
+    <div class="bloggrid" id="blogGrid"></div>
+  </div>
+</section>
+
+<section class="sec soft" id="uscis" style="display:none">
+  <div class="wrap">
+    <div class="head">
+      <div class="k" data-edit="uscis_kicker">Straight from USCIS</div>
+      <h2 data-edit="uscis_title">Latest from USCIS</h2>
+      <p data-edit="uscis_sub">Official announcements pulled automatically from the USCIS newsroom.</p>
+    </div>
+    <div class="uscislist" id="uscisList"></div>
+    <p class="uscis-upd" id="uscisUpd"></p>
+  </div>
+</section>
+
+<div class="pmodal" id="pmodal">
+  <div class="pmbox"><button class="pmx" type="button" aria-label="Close" onclick="closePost()">×</button><div class="pmpad" id="pmContent"></div></div>
+</div>
+
 <section class="ctaband" id="contact">
   <div class="wrap">
     <h2 data-edit="cta_title">Let's talk about your case</h2>
@@ -337,8 +404,95 @@
       });
       if(row.children.length) gsec.style.display = '';
     }
+    /* Blog posts — admin-managed from content.json. */
+    var posts = Array.isArray(c.posts) ? c.posts : [];
+    window.__POSTS = {};
+    var bg = document.getElementById('blogGrid'), bsec = document.getElementById('blog');
+    if(bg && bsec && posts.length){
+      bg.innerHTML = '';
+      posts.forEach(function(p){
+        if(!p || !p.title) return;
+        window.__POSTS[p.id] = p;
+        var b = document.createElement('button'); b.className = 'pcard'; b.type = 'button';
+        b.addEventListener('click', (function(id){ return function(){ openPost(id); }; })(p.id));
+        var cat = document.createElement('span'); cat.className = 'pcat'; cat.textContent = p.cat || 'Immigration'; b.appendChild(cat);
+        var h = document.createElement('h3'); h.textContent = p.title; b.appendChild(h);
+        var s = document.createElement('p'); s.textContent = p.summary || ''; b.appendChild(s);
+        var d = document.createElement('div'); d.className = 'pdate'; d.textContent = fmtDate(p.date); b.appendChild(d);
+        var m = document.createElement('div'); m.className = 'pmore'; m.textContent = 'Read article →'; b.appendChild(m);
+        bg.appendChild(b);
+      });
+      if(bg.children.length) bsec.style.display = '';
+      var h0 = (location.hash || '').replace(/^#/, '');
+      if(h0 && window.__POSTS[h0]) openPost(h0);
+    }
   }).catch(function(){});
+  renderUscis();
 })();
+
+/* ── Blog post reader, sharing & the live USCIS feed ────────────────────── */
+function fmtDate(d){ if(!d) return ''; var dt = new Date(d); if(isNaN(dt.getTime())) return String(d); return dt.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); }
+function fmtFeedDate(d){ if(!d) return ''; var s = String(d).replace(/\s+\d{1,2}:\d{2}(:\d{2})?.*$/, ''); return s.replace(/^\w{3},\s*/,''); }
+
+function offorCopy(url, btn){
+  var msg = document.getElementById('pmShareMsg');
+  function ok(){ if(msg){ msg.textContent = 'Link copied'; setTimeout(function(){ msg.textContent=''; }, 3000); } }
+  try{ navigator.clipboard.writeText(url).then(ok, function(){ fb(); }); }catch(e){ fb(); }
+  function fb(){ try{ var ta=document.createElement('textarea'); ta.value=url; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); ok(); }catch(err){ if(msg) msg.textContent = url; } }
+}
+
+function openPost(id){
+  var p = window.__POSTS && window.__POSTS[id]; if(!p) return;
+  var url = 'https://offorlaw.com/#' + id;
+  var c = document.getElementById('pmContent'); if(!c) return;
+  c.innerHTML = '';
+  var cat = document.createElement('span'); cat.className='pcat'; cat.textContent = p.cat || 'Immigration'; c.appendChild(cat);
+  var h = document.createElement('h1'); h.textContent = p.title; c.appendChild(h);
+  var meta = document.createElement('div'); meta.className='pmeta'; meta.textContent = fmtDate(p.date) + ' · Offor Law PLLC'; c.appendChild(meta);
+  var body = document.createElement('div'); body.className='pbody';
+  String(p.body||'').split(/\n\n+/).forEach(function(par){ if(par.trim()){ var pp=document.createElement('p'); pp.textContent=par.trim(); body.appendChild(pp); } });
+  c.appendChild(body);
+  var disc = document.createElement('p'); disc.className='pdisc'; disc.textContent = 'This article is general information, not legal advice. For guidance on your situation, contact Offor Law PLLC or see the official source at uscis.gov.'; c.appendChild(disc);
+  var e = encodeURIComponent, t = e(p.title + ' — Offor Law PLLC');
+  var wa='https://wa.me/?text='+e(p.title+' '+url), xx='https://twitter.com/intent/tweet?text='+t+'&url='+e(url), fb='https://www.facebook.com/sharer/sharer.php?u='+e(url), li='https://www.linkedin.com/sharing/share-offsite/?url='+e(url), ml='mailto:?subject='+t+'&body='+e(p.title+'\n\n'+url);
+  var share = document.createElement('div'); share.className='pmshare';
+  share.innerHTML = '<span class="lbl">Share</span>'
+    + '<a class="shico" style="background:#25d366" target="_blank" rel="noopener" title="WhatsApp" href="'+wa+'"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.5.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1z"/></svg></a>'
+    + '<a class="shico" style="background:#111" target="_blank" rel="noopener" title="X" href="'+xx+'"><svg viewBox="0 0 24 24"><path d="M17.5 3h2.8l-6.1 7 7.2 11h-5.6l-4.4-6.4L6 21H3.2l6.6-7.6L3 3h5.7l4 6zm-1 16h1.5L8 4.6H6.4z"/></svg></a>'
+    + '<a class="shico" style="background:#1877f2" target="_blank" rel="noopener" title="Facebook" href="'+fb+'"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-3V9.8c0-.5.4-.8.9-.8z"/></svg></a>'
+    + '<a class="shico" style="background:#0a66c2" target="_blank" rel="noopener" title="LinkedIn" href="'+li+'"><svg viewBox="0 0 24 24"><path d="M6.9 8.5v10H3.8v-10zM5.3 3.7a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM20.2 18.5h-3.1v-5.3c0-1.3-.5-2.1-1.6-2.1-.9 0-1.3.6-1.6 1.2v6.2H10.8s.04-9.4 0-10h3.1v1.4c.4-.6 1.2-1.5 2.8-1.5 2 0 3.5 1.3 3.5 4.2z"/></svg></a>'
+    + '<a class="shico" style="background:#8a97a2" title="Email" href="'+ml+'"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 2.4V18h18V7.4l-9 5.6z"/></svg></a>'
+    + '<button class="shico" style="background:#5b6b78" type="button" title="Copy link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></button>'
+    + '<span class="shmsg2" id="pmShareMsg"></span>';
+  c.appendChild(share);
+  var cbtn = share.querySelector('button'); if(cbtn) cbtn.addEventListener('click', function(){ offorCopy(url, cbtn); });
+  var m = document.getElementById('pmodal'); if(m){ m.classList.add('open'); } document.body.style.overflow = 'hidden';
+  var box = m && m.querySelector('.pmbox'); if(box) box.scrollTop = 0;
+  try{ history.replaceState(null, '', '#' + id); }catch(e2){}
+}
+function closePost(){ var m=document.getElementById('pmodal'); if(m) m.classList.remove('open'); document.body.style.overflow=''; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePost(); });
+(function(){ var m=document.getElementById('pmodal'); if(m) m.addEventListener('click', function(e){ if(e.target===m) closePost(); }); })();
+
+function renderUscis(){
+  fetch('uscis-updates.json?_=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+    if(!d || !Array.isArray(d.items) || !d.items.length) return;
+    var list=document.getElementById('uscisList'), sec=document.getElementById('uscis'), upd=document.getElementById('uscisUpd');
+    if(!list || !sec) return;
+    list.innerHTML = '';
+    d.items.slice(0,8).forEach(function(it){
+      if(!it || !it.title || !it.link) return;
+      var a=document.createElement('a'); a.className='ufeed'; a.href=it.link; a.target='_blank'; a.rel='noopener';
+      var seal=document.createElement('div'); seal.className='seal'; seal.textContent='USCIS'; a.appendChild(seal);
+      var ub=document.createElement('div'); ub.className='ub';
+      var t=document.createElement('div'); t.className='ut'; t.textContent=it.title; ub.appendChild(t);
+      if(it.summary){ var s=document.createElement('div'); s.className='us'; s.textContent=it.summary; ub.appendChild(s); }
+      var dd=document.createElement('div'); dd.className='ud'; dd.textContent=(fmtFeedDate(it.date)? fmtFeedDate(it.date)+' · ':'')+'Read on uscis.gov →'; ub.appendChild(dd);
+      a.appendChild(ub); list.appendChild(a);
+    });
+    if(list.children.length){ sec.style.display=''; if(upd && d.updated){ upd.textContent='Auto-synced from the USCIS newsroom · last updated '+fmtDate(d.updated); } }
+  }).catch(function(){});
+}
 </script>
 
 </body>

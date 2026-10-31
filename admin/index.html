@@ -84,6 +84,7 @@
   <p class="note" style="margin:2px 0 14px">Edit any section below, then press <b>Save &amp; Publish</b>. Changes go live on offorlaw.com in about a minute. Empty a field to restore its built‑in default.</p>
   <div id="form"></div>
   <div id="reelMgr"></div>
+  <div id="blogMgr"></div>
 
   <details class="sec" id="sec-settings">
     <summary>Settings <span class="chev">Passcode &amp; publishing ▾</span></summary>
@@ -144,6 +145,10 @@ var SCHEMA=[
     ["about_kicker","Kicker"],["about_title","Heading (e.g. attorney name)"],["about_bio","Bio / about text","area"]]},
   {t:"Photo Reel (headings)", f:[
     ["gallery_kicker","Section kicker"],["gallery_title","Section title"],["gallery_sub","Section intro","area"]]},
+  {t:"Blog (headings)", f:[
+    ["blog_kicker","Section kicker"],["blog_title","Section title"],["blog_sub","Section intro","area"]]},
+  {t:"USCIS feed (headings)", f:[
+    ["uscis_kicker","Section kicker"],["uscis_title","Section title"],["uscis_sub","Section intro","area"]]},
   {t:"Call to Action", f:[
     ["cta_title","Title"],["cta_sub","Subtitle"],["cta_btn","Button"]]},
   {t:"Contact & Footer", f:[
@@ -164,15 +169,16 @@ document.getElementById("form").innerHTML=SCHEMA.map(function(s){
 }).join("");
 
 /* ---- auth (supports a published hash so a changed passcode works on any device) ---- */
-var CUR={}, CURP, REEL=[], HEROP="";
+var CUR={}, CURP, REEL=[], HEROP="", POSTS=[];
 var HERO_DEFAULT="/assets/attorney.jpg";
 function loadContent(){CURP=fetch("/"+PATH+"?_="+Date.now()).then(function(r){return r.ok?r.json():{};}).then(function(c){
   CUR=c||{};KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=(typeof CUR[k]==="string")?CUR[k]:"";});
   HEROP=(typeof CUR.hero_photo==="string")?CUR.hero_photo:"";
   REEL=Array.isArray(CUR.reel)?CUR.reel.map(function(x){return {img:(x&&x.img)||"",cap:(x&&x.cap)||""};}).filter(function(x){return x.img;}):[];
-  renderReel();
+  POSTS=Array.isArray(CUR.posts)?CUR.posts.map(function(p){return {id:(p&&p.id)||"",cat:(p&&p.cat)||"",date:(p&&p.date)||"",title:(p&&p.title)||"",summary:(p&&p.summary)||"",body:(p&&p.body)||""};}):[];
+  renderReel(); renderBlog();
   return CUR;
-}).catch(function(){CUR={};renderReel();return CUR;});return CURP;}
+}).catch(function(){CUR={};renderReel();renderBlog();return CUR;});return CURP;}
 loadContent();
 
 /* ---- main (attorney/hero) photo: replaceable in real time; stored in content.json so it updates everywhere ---- */
@@ -239,6 +245,45 @@ function reelCap(i,v){if(REEL[i])REEL[i].cap=v;}
 function reelDel(i){REEL.splice(i,1);renderReel();}
 function reelMove(i,d){var j=i+d;if(j<0||j>=REEL.length)return;var t=REEL[i];REEL[i]=REEL[j];REEL[j]=t;renderReel();}
 
+/* ---- blog post manager (posts live in content.json; publish via Worker → live on all devices) ---- */
+function bval(id){var el=document.getElementById(id);return el?el.value:"";}
+function bslug(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,48)||("post-"+Date.now());}
+function renderBlog(){
+  var el=document.getElementById("blogMgr");if(!el)return;
+  var rows=POSTS.map(function(p,i){
+    return '<div class="reelItem"><div class="ri-body"><div style="font-weight:600;color:var(--navy)">'+esc(p.title||"(untitled)")+'</div>'
+      +'<div class="note" style="margin:2px 0 0">'+esc(p.cat||"")+(p.date?' · '+esc(p.date):"")+'</div>'
+      +'<div class="ri-actions"><button type="button" class="btn btn-ghost mini" onclick="blogEdit('+i+')">Edit</button>'
+      +'<button type="button" class="btn btn-ghost mini" onclick="blogMove('+i+',-1)">↑</button>'
+      +'<button type="button" class="btn btn-ghost mini" onclick="blogMove('+i+',1)">↓</button>'
+      +'<button type="button" class="btn btn-ghost mini danger" onclick="blogDel('+i+')">Delete</button></div></div></div>';
+  }).join("");
+  el.innerHTML='<details class="sec" id="sec-blog"><summary>Blog posts ('+POSTS.length+') <span class="chev">Add &amp; edit immigration articles ▾</span></summary><div class="body">'
+    +'<p class="note">Write and update immigration articles. They appear in the homepage Blog and are shareable on every platform. Changes go live for everyone when you press <b>Save &amp; Publish</b>.</p>'
+    +'<div class="reelList">'+(rows||'<p class="reelEmpty">No posts yet.</p>')+'</div>'
+    +'<hr style="border:0;border-top:1px solid var(--line);margin:16px 0">'
+    +'<h3 style="font-size:15px;margin:0 0 8px" id="blogFormTitle">Add a new post</h3>'
+    +'<div class="two"><div><label>Title</label><input id="bp_title"></div><div><label>Category <span class="hint">(e.g. Green Cards)</span></label><input id="bp_cat"></div></div>'
+    +'<label>Date</label><input id="bp_date" type="date">'
+    +'<label>Summary <span class="hint">shown on the card</span></label><textarea id="bp_summary"></textarea>'
+    +'<label>Article body <span class="hint">leave a blank line between paragraphs</span></label><textarea id="bp_body" style="min-height:170px"></textarea>'
+    +'<input type="hidden" id="bp_idx" value="-1"><input type="hidden" id="bp_id" value="">'
+    +'<div style="display:flex;gap:10px;margin-top:12px"><button type="button" class="btn btn-o" onclick="blogSave()">Save post</button><button type="button" class="btn btn-ghost" onclick="blogNew()">Clear / new</button></div>'
+    +'</div></details>';
+}
+function setBp(p){["title","cat","date","summary","body","id"].forEach(function(k){var el=document.getElementById("bp_"+k);if(el)el.value=p[k]||"";});var ix=document.getElementById("bp_idx");if(ix)ix.value=(p.idx==null?-1:p.idx);var ft=document.getElementById("blogFormTitle");if(ft)ft.textContent=(p.idx>=0?"Edit post":"Add a new post");}
+function blogNew(){setBp({idx:-1});}
+function blogEdit(i){var p=POSTS[i];if(!p)return;setBp({idx:i,id:p.id,title:p.title,cat:p.cat,date:p.date,summary:p.summary,body:p.body});var el=document.getElementById("bp_title");if(el)el.scrollIntoView({behavior:"smooth",block:"center"});}
+function blogDel(i){POSTS.splice(i,1);renderBlog();}
+function blogMove(i,d){var j=i+d;if(j<0||j>=POSTS.length)return;var t=POSTS[i];POSTS[i]=POSTS[j];POSTS[j]=t;renderBlog();}
+function blogSave(){
+  var title=bval("bp_title").trim();if(!title){setMsg("Add a title for the post.","bad");return;}
+  var idx=parseInt(bval("bp_idx"),10);var id=bval("bp_id")||bslug(title);
+  var post={id:id,cat:bval("bp_cat").trim(),date:bval("bp_date"),title:title,summary:bval("bp_summary").trim(),body:bval("bp_body")};
+  if(idx>=0&&POSTS[idx])POSTS[idx]=post; else POSTS.unshift(post);
+  renderBlog();blogNew();setMsg("Post saved. Press Save & Publish to put it live.","ok");
+}
+
 function sha256(str){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)).then(function(buf){
   return Array.prototype.map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,"0");}).join("");});}
 function unlock(){var v=document.getElementById("pass").value;
@@ -256,6 +301,7 @@ function gather(){var o={};for(var k in CUR){o[k]=CUR[k];}            // preserv
   KEYS.forEach(function(k){var el=document.getElementById("f-"+k);if(el)o[k]=el.value;});
   o.reel=REEL.filter(function(x){return x&&x.img;}).map(function(x){return {img:x.img,cap:x.cap||""};});  // photo reel
   o.hero_photo=HEROP||"";  // main attorney/hero photo (blank = committed default)
+  o.posts=POSTS.filter(function(p){return p&&p.title;}).map(function(p){return {id:p.id||"",cat:p.cat||"",date:p.date||"",title:p.title,summary:p.summary||"",body:p.body||""};});  // blog
   return o;}
 function jsonOf(o){return JSON.stringify(o,null,2)+"\n";}
 function setMsg(t,cls){var m=document.getElementById("msg");m.textContent=t;m.className="msg "+(cls||"");}
